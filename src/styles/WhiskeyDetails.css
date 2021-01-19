@@ -1,0 +1,142 @@
+.whiskey-details-wrapper{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.margin-label{
+    margin: 1.2em 0;
+}
+
+.margin-top{
+    margin-top: 2em;
+}
+
+.margin-bottom-none {
+    margin-bottom: 0 !important;
+}
+
+.header-label{
+    background-color: var(--secondary-color);
+    padding-left: 2em;
+    padding: 2px 2em;
+    text-align: left;
+    color: var(--light-color);
+    font-weight: 400;
+}
+
+.header-label h3{
+    margin: 8px 0;
+    font-weight: 400;
+    font-size: 1.5em;
+}
+
+.sticker-label{
+    display: flex;
+    align-items: center;
+}
+
+.sticker-label p {
+    font-size: 1.5em;
+    margin: 0;
+    margin-right: 2em;
+}
+
+.sticker {
+    background: var(--light-color);
+    padding: 5px 25px;
+    border-radius: 0.8em;
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.sticker h2{
+    margin: 0;
+    color: var(--dark-color);
+    font-size: 1.5em;
+}
+
+.label-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.notes{
+    padding: 1.5em;
+    text-align: left;
+    border: 1px solid var(--secondary-color);
+    border-top: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.notes p{
+    color: var(--dark-color);
+    display: inline;
+    line-height: 36x;
+    font-size: 18px;
+    display: inline-block;
+    flex: 1 1 100px;
+    
+}
+
+
+.under-label-wrapper{
+    display: inline-block;
+    text-align: left;
+    padding: 5px 0;
+    flex-grow: 1;
+    margin-right: 2em;
+    min-width: max(25%, 140px);
+    max-width: max(50%, 400px);
+}
+
+.under-label-wrapper p{
+    margin: 0;
+}
+
+.label-value{
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.line{
+    width: 100%;
+    height: 1px;
+    background-color: var(--secondary-color);
+    margin: 2px 0 -1px 0;
+}
+
+.under-label{
+    color: var(--secondary-color);
+}
+
+.chart-wrapper{
+    width: 50%;
+    position: relative;
+    text-align: left;
+}
+
+.flex-chart{
+    min-width: 50%;
+}
+
+
+@media (max-width: 900px){
+    .chart-wrapper{
+        width:100%;
+    }
+}
+
+.chart canvas{
+    height: 100%;
+    width: 100%;
+}
+
+.chart-wrapper h4 {
+    color: var(--secondary-color);
+}

@@ -1,0 +1,17 @@
+body{
+    --primary-color: #A67B53;
+    --secondary-color: #D18D28;
+    --contrast-color: #074859;
+    --light-color: #f8f5ef;
+    --dark-color: #593E24;
+}
+
+
+
+p{
+    color: var(--light-color);
+}
+
+body{
+    background-color: var(--light-color);
+}
