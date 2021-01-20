@@ -1,6 +1,6 @@
 import WhiskeyListing from './WhiskeyListing';
 import whiskeyData from '../data/whiskeyData';
-import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import { 
     Switch,
     Route,
@@ -32,9 +32,7 @@ function Barrels() {
                         <BarrelDetails whiskeyData={whiskeyData} />
                     </Route>
                     <Route path={match.path}>
-                    <div className='flex flex-center flex-wrap'>
                         {inventory}
-                    </div>
                     </Route>
                 </Switch>
             </div>
@@ -65,19 +63,28 @@ function BarrelCard(props) {
     }
 
     return (
-        <Link
-            className='barrel-card' 
-            to={`${props.match.url}/${wData.tokenId}`}>
-            <Card 
-                onClick={() => handleBarrelClick(wData.tokenId)}
-                style={{transform: `rotate(${Math.random() * 20 - 10}deg)`}}>
-                <Card.Body className='flex flex-center'>
-                    <Card.Title>{wData.name}</Card.Title>
-                    <Card.Subtitle className='mb-2 text-muted'>{wData.distillery}</Card.Subtitle>
-
-                </Card.Body>
-            </Card>
-        </Link>
+        <div className='barrel-card'>
+            <Link
+                to={`${props.match.url}/${wData.tokenId}`}>
+                <div className='barrel-listing flex'>
+                    <div className='barrel-img-wrapper'>
+                        <img alt={wData.name} src='/images/rye55.jpg' />
+                    </div>
+                    <div className='barrel-details'>
+                        <div className='barrel-title'>
+                            <h4>{wData.name}</h4>
+                            <h5 className='mb-2 text-muted'>{wData.distillery}</h5>
+                        </div>
+                        <div className='barrel-description'>
+                            <p>{wData.distillersNotes}</p>
+                        </div>
+                        <div className='price'>
+                            <Button>Information</Button>
+                        </div>
+                    </div>
+                </div>
+            </Link>
+        </div>
     )
 
 }

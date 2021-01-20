@@ -1,51 +1,79 @@
-
-#barrel-bg{
-    background-image: url('./images/barrelHouse.jpg');
-    background-size: cover;
+.barrel-card{
+    width: 100%;
+    margin-bottom: 1em;
+    flex-wrap: wrap;
 }
 
-.barrel-card .card{
-    width: 300px;
-    min-height: 300px;
-    margin: 1px;
-    border-radius: 50%;
-    background-image: url('./images/barrelTop.png');
-    background-size: cover;
-    border: 0;
-    background-color: transparent;
-    color: var(--dark-color);
+.barrel-img-wrapper{
+    flex: 0 0 100%;
+    position: relative;
 }
 
-.card-body{
+.barrel-img-wrapper img{
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.barrel-listing{
     flex-direction: column;
 }
 
-.card-title{
-    font-size: 1.6em !important;
-    max-width: 90%;
-    font-weight: bold !important;
-    text-shadow: 0 0 2px #d3b47c;
-    color: black;
+.barrel-details{
+    flex: 0 0 100%;
+    text-align: left;
+    color: var(--dark-color);
 }
 
-.card-subtitle{
-    color: var(--light-color);
+.barrel-details>div{
+    padding: 0.5em 1em;
 }
 
-.text-muted.mb-2{
-    text-transform: uppercase;
-    font-size: 1.4em !important;
-    color: #000 !important;
-    text-shadow: 0 0 3px black;
-    font-weight: bold;
-    box-shadow: inset 0 0 7px 1px black;
-    padding: 5px;
+.barrel-title{ 
+    border-bottom: 3px solid var(--primary-color);
 }
 
-a.barrel-card:hover{
-    text-decoration: none;
+.barrel-description{
+    padding-top: 1.5em !important;
 }
 
-a.barrel-card:hover .text-muted.mb-2{
-    color: var(--dark-color) !important;
+.barrel-description p{
+    color: var(--dark-color);
+}
+
+@media (min-width: 580px) {
+    
+    
+    .barrel-listing{
+        flex-direction: row;
+    }
+    
+    .barrel-img-wrapper:after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 10px;
+        right: 0;
+        top: 0;
+        border-left: 3px solid var(--primary-color);
+        border-right: 3px solid var(--primary-color);
+    }
+
+    
+    .barrel-img-wrapper{
+        flex: 0 0 45%;
+        padding-right: 2.5em;
+    }
+
+        
+    .barrel-details{
+        flex: 0 0 55%;
+    }
+
+        
+    .barrel-details>div{
+        padding: 0.5em 2em;
+    }
+
 }
