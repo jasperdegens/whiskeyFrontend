@@ -2,6 +2,17 @@
     width: 80%;
     margin: 0 auto;
     margin-top: 30px;
+    background-color: var(--light-color);
+    padding-bottom: 2em;
+}
+
+.back-wrapper{
+    text-align: left;
+    padding: 1em 2em 0 2em;
+}
+
+.back-wrapper a{
+    font-size: 1.5em;
 }
 
 .margin-label{
@@ -62,6 +73,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     position: relative;
+    padding: 0 2em;
 }
 
 .notes{

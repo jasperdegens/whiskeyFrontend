@@ -2,6 +2,7 @@ import '../styles/WhiskeyDetails.css';
 import Chart from 'chart.js';
 import Button from 'react-bootstrap/Button';
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // WhiskeyDetails props = whiskey schema 
 function WhiskeyListing(props) {
@@ -182,6 +183,9 @@ function WhiskeyListing(props) {
 
     return (
         <div className='whiskey-details-wrapper'>
+            <div className='back-wrapper'>
+                <Link to='/barrels'>Back</Link>
+            </div>
             <div className='sticker-label header-label margin-label'>
                 <p>WHISKEY</p>
                 <div className='sticker'>

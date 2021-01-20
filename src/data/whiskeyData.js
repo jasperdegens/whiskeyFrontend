@@ -40,7 +40,7 @@ const testFlavorProfile = {
 
 const rye38 = {
     name: 'Rye Barrel #38',
-    tokenId: 1,
+    tokenId: 0,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Rye',
     distilleryAddress: '0x9192',
@@ -86,7 +86,7 @@ const rye39 = {
 
 const rye40 = {
     name: 'Rye Barrel #40',
-    tokenId: 1,
+    tokenId: 2,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Rye',
     distilleryAddress: '0x9192',
@@ -109,7 +109,7 @@ const rye40 = {
 
 const rye41 = {
     name: 'Rye Barrel #41',
-    tokenId: 1,
+    tokenId: 3,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Rye',
     distilleryAddress: '0x9192',

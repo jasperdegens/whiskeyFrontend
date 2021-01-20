@@ -1,0 +1,51 @@
+
+#barrel-bg{
+    background-image: url('./images/barrelHouse.jpg');
+    background-size: cover;
+}
+
+.barrel-card .card{
+    width: 300px;
+    min-height: 300px;
+    margin: 1px;
+    border-radius: 50%;
+    background-image: url('./images/barrelTop.png');
+    background-size: cover;
+    border: 0;
+    background-color: transparent;
+    color: var(--dark-color);
+}
+
+.card-body{
+    flex-direction: column;
+}
+
+.card-title{
+    font-size: 1.6em !important;
+    max-width: 90%;
+    font-weight: bold !important;
+    text-shadow: 0 0 2px #d3b47c;
+    color: black;
+}
+
+.card-subtitle{
+    color: var(--light-color);
+}
+
+.text-muted.mb-2{
+    text-transform: uppercase;
+    font-size: 1.4em !important;
+    color: #000 !important;
+    text-shadow: 0 0 3px black;
+    font-weight: bold;
+    box-shadow: inset 0 0 7px 1px black;
+    padding: 5px;
+}
+
+a.barrel-card:hover{
+    text-decoration: none;
+}
+
+a.barrel-card:hover .text-muted.mb-2{
+    color: var(--dark-color) !important;
+}

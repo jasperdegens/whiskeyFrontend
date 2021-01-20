@@ -11,6 +11,7 @@ import Header from './components/Header';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
 import Barrels from './components/Barrels';
+import ThreePlayground from './components/ThreePlayground';
 import Footer from './components/Footer';
 
 // import bootstrap styles
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route path='/about'>
               <About />
+            </Route>
+            <Route path='/three'>
+              <ThreePlayground />
             </Route>
           </Switch>
         </div>

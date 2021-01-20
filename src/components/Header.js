@@ -17,6 +17,7 @@ function Header() {
                     <Nav.Item as='li'><Link to='/barrels'>Barrels</Link></Nav.Item>
                     <Nav.Item as='li'><Link to='/dashboard'>Dashboard</Link></Nav.Item>
                     <Nav.Item as='li'><Link to='/about'>About</Link></Nav.Item>
+                    <Nav.Item as='li'><Link to='/three'>Three</Link></Nav.Item>
                 </Nav>
             </Navbar>
         </header>
