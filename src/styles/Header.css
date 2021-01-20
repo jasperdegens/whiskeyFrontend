@@ -21,3 +21,7 @@ nav{
     color: var(--dark-color);
     text-transform: uppercase;
 }
+
+.navbar-nav{
+    text-align: left;
+}

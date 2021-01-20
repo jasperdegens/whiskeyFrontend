@@ -152,3 +152,9 @@
 .chart-wrapper h4 {
     color: var(--secondary-color);
 }
+
+@media (max-width:576px) {
+    .whiskey-details-wrapper{
+        width: 100% !important;
+    }
+}

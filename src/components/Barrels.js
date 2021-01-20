@@ -73,7 +73,7 @@ function BarrelCard(props) {
                     <div className='barrel-details'>
                         <div className='barrel-title'>
                             <h4>{wData.name}</h4>
-                            <h5 className='mb-2 text-muted'>{wData.distillery}</h5>
+                            <h5>{wData.distillery}</h5>
                         </div>
                         <div className='barrel-description'>
                             <p>{wData.distillersNotes}</p>
