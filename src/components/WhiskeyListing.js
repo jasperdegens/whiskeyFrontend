@@ -130,6 +130,7 @@ function WhiskeyListing(props) {
                             labelString: 'Cost',
                         },
                         ticks: {
+                            stepSize: 1,
                             callback: function (v, u, vs) { return '$' + v}
                         }
                         
@@ -183,11 +184,9 @@ function WhiskeyListing(props) {
 
     return (
         <div className='whiskey-details-wrapper'>
-            <div className='back-wrapper'>
-                <Link to='/barrels'>Back</Link>
-            </div>
+            
             <div className='sticker-label header-label margin-label'>
-                <p>WHISKEY</p>
+                <h3 className='header-title'>WHISKEY</h3>
                 <div className='sticker'>
                     <h2>{whiskeyData.name}</h2>
                 </div>
@@ -231,7 +230,7 @@ function WhiskeyListing(props) {
                 />
             </div>
             <div className='header-label margin-label'>
-                <h3>BARREL</h3>
+                <h3 className='header-title'>BARREL</h3>
             </div>
             <div className='label-group'>
                 <UnderLabelTextField 
@@ -248,7 +247,7 @@ function WhiskeyListing(props) {
                 />
             </div>
             <div className='header-label margin-label margin-bottom-none'>
-                <h3>NOTES</h3>
+                <h3 className='header-title'>NOTES</h3>
             </div>
             <div className='notes'>
                 <p>{whiskeyData.distillersNotes}</p>
@@ -257,7 +256,7 @@ function WhiskeyListing(props) {
                 </div>
             </div>
             <div className='header-label margin-label'>
-                <h3>PRICING</h3>
+                <h3 className='header-title'>PRICING</h3>
             </div>            
             <div className='label-group margin-top'>
                 <div className='chart-wrapper'>
@@ -280,7 +279,7 @@ function WhiskeyListing(props) {
                 />
             </div>
             <div className='header-label margin-label'>
-                <h3>Purchase</h3>
+                <h3 className='header-title'>Purchase</h3>
             </div>
             <div className='label-group'>
                 <Button>

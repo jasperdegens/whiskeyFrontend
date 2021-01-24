@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header';
+import Home from './components/Home';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
 import Barrels from './components/Barrels';
@@ -25,9 +26,6 @@ function App() {
         <Header />
         <div className='content'>
           <Switch>
-            <Route path='/home'>
-
-            </Route>
             <Route path="/barrels">
               <Barrels />
             </Route>
@@ -39,6 +37,9 @@ function App() {
             </Route>
             <Route path='/three'>
               <ThreePlayground />
+            </Route>
+            <Route path='/'>
+              <Home />
             </Route>
           </Switch>
         </div>

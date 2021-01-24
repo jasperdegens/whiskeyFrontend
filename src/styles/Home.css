@@ -1,0 +1,46 @@
+.container{
+    text-align: left;
+}
+
+.description{
+    font-size: 16px;
+}
+
+.how-it-works-wrapper{
+    align-items: center;
+    justify-content: space-between;
+    margin: 4em 2em;
+    overflow: hidden;
+}
+
+
+.detail-sm{
+    flex: 0 0 20%;
+}
+
+
+.detail-md{
+    flex: 0 0 30%;
+}
+
+
+.detail-lg{
+    flex: 0 0 40%;
+}
+
+.how-it-works-detail img{
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 1em;
+}
+
+.how-it-works-detail p{
+    font-size: 1.5em;
+    display: inline;
+}
+
+.how-it-works-detail p.number{
+    font-size: 3em;
+    line-height: 1em;
+}

@@ -1,9 +1,14 @@
 .whiskey-details-wrapper{
-    width: 80%;
+    width: 95%;
     margin: 0 auto;
     margin-top: 30px;
     background-color: var(--light-color);
     padding-bottom: 2em;
+    border: 3px solid var(--contrast-color);
+    padding: 0.5em 3em 2em 1.5em;
+    border-radius: 0 40px 40px 0;
+    box-shadow: 5px 3px 11px 0px #a3a3a3;
+
 }
 
 .back-wrapper{
@@ -33,24 +38,26 @@
     padding: 2px 2em;
     text-align: left;
     color: var(--light-color);
-    font-weight: 400;
 }
 
 .header-label h3{
     margin: 8px 0;
-    font-weight: 400;
-    font-size: 1.5em;
+}
+
+.sticker-label h3 {
+    margin: 0;
+    margin-right: 2em;
+}
+
+.header-title{
+    font-size: 1.75em;
+    font-family: monospace;
 }
 
 .sticker-label{
     display: flex;
-    align-items: center;
-}
-
-.sticker-label p {
-    font-size: 1.5em;
-    margin: 0;
-    margin-right: 2em;
+    align-items: baseline;
+    text-transform: uppercase;
 }
 
 .sticker {
@@ -89,7 +96,7 @@
     color: var(--dark-color);
     display: inline;
     line-height: 36x;
-    font-size: 18px;
+    font-size: 15px;
     display: inline-block;
     flex: 1 1 100px;
     

@@ -3,13 +3,13 @@ body{
     --secondary-color: #D18D28;
     --contrast-color: #074859;
     --light-color: #f5f4f1;
-    --dark-color: #593E24;
+    --dark-color: #47311d;
 }
 
 
 
 p{
-    color: var(--light-color);
+    color: var(--dark-color);
 }
 
 body{

@@ -48,10 +48,14 @@ function Barrels() {
 
 function BarrelDetails(props) {
     let {barrelId} = useParams();
-    
+    const whiskey = props.whiskeyData[parseInt(barrelId)];
+
     return (
         <>
-            <WhiskeyListing whiskeyData={props.whiskeyData[parseInt(barrelId)]} />
+            <div className='back-wrapper'>
+                <p><Link to='/barrels'>&larr; Barrels</Link> {'> ' + whiskey.name}</p>
+            </div>
+            <WhiskeyListing whiskeyData={whiskey} />
         </>
     )
 }
