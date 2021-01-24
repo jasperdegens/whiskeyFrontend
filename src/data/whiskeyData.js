@@ -130,6 +130,11 @@ const rye41 = {
 };
 
 
-const whiskeyData = [ rye38, rye39, rye40, rye41 ];
+const whiskeyData = {
+    'rye': [rye38, rye39, rye40, rye41 ],
+    'bourbon': [rye38, rye39, rye40, rye41 ],
+    'blend': [rye38, rye39, rye40, rye41 ],
+    'special': [rye38, rye39, rye40, rye41 ] 
+};
 
 export default whiskeyData;

@@ -1,3 +1,22 @@
+#whiskey-type-wrapper{
+    margin-bottom: 4em;
+}
+
+#whiskey-type-nav ul{
+    padding: 0;
+    font-size: 20px;
+}
+
+
+#whiskey-type-nav ul li{
+    display: inline;
+    text-transform: capitalize;
+}
+
+#whiskey-type-nav ul li a{
+    color: var(--contrast-color);
+}
+
 .barrel-card{
     width: 100%;
     margin-bottom: 1em;

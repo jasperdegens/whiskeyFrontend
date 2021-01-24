@@ -1,4 +1,8 @@
 
+.content{
+    background-size: cover !important;
+}
+
 .container{
     padding-top: 2em;
     padding-bottom: 2em;

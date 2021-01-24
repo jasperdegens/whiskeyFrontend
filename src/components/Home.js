@@ -24,7 +24,7 @@ function Home() {
                 <img src='/images/barrels.jpg' alt='distillery'/>
             </div>
             <div className='how-it-works-detail detail-lg'>
-                <p className='number'>1. </p><p>Distillery creates an amazing single barrel whiskey and creates a listing in the Whiskey Guild.</p>
+                <p className='number'>1. </p><p>A craft distillery does their magic and creates an amazing single barrel whiskey.</p>
             </div>
             <div className='how-it-works-detail detail-sm'></div>
         </div>
@@ -69,6 +69,10 @@ function Home() {
         <div className='header-label margin-label'>
             <h3 className='header-title'>Latest Barrels</h3>
         </div> 
+
+        <div className='header-label margin-label'>
+            <h3 className='header-title'>Why Whiskey Guild?</h3>
+        </div>
     </div>
     )
 

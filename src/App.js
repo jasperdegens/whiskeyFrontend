@@ -24,7 +24,7 @@ function App() {
     <Router>
       <div className="App">
         <Header />
-        <div className='content'>
+        <div className='content' style={{background: 'url("/images/barrels.jpg")'}}>
           <Switch>
             <Route path="/barrels">
               <Barrels />

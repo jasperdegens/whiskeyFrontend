@@ -14,12 +14,27 @@ function Barrels() {
     
     let match = useRouteMatch();
 
-    const inventory = whiskeyData.map(wData => {
+    const whiskeyTypes = Object.keys(whiskeyData);
+
+
+    const inventory = whiskeyTypes.map(wKey => {
+        const wData = whiskeyData[wKey];
+
         return (
-            <BarrelCard 
-                key={wData.tokenId} 
-                match={match}
-                whiskey={wData} />
+            <div className='whiskey-type-wrapper' key={wKey} id={wKey}>
+            <div className='header-label margin-label'>
+              <h3 className='header-title'>{wKey.toUpperCase()}</h3>
+            </div>
+            {wData.map(w => {
+                return (
+                    <BarrelCard 
+                    key={w.tokenId} 
+                    match={match}
+                    whiskey={w} />
+                )})
+            }
+           
+            </div>
         );
     });
 
@@ -32,23 +47,40 @@ function Barrels() {
                         <BarrelDetails whiskeyData={whiskeyData} />
                     </Route>
                     <Route path={match.path}>
+                        <WhiskeyTypeNav whiskeyTypes={whiskeyTypes} />
                         {inventory}
                     </Route>
                 </Switch>
             </div>
         </div>
     )
-    
-    // return (
-    //     <>
-    //         <h2>Barrels</h2>
-    //     </>
-    // )
+}
+
+function WhiskeyTypeNav(props) {
+    return (
+        <div id='whiskey-type-nav'>
+            <ul>
+            {props.whiskeyTypes.map((t, index) => {
+                return (
+                    <li key={t}><a href={`#${t}`}>{t}</a>
+                    { index < props.whiskeyTypes.length - 1 ?
+                        (<span> &#8226; </span>)  : (<> </>) }
+                    </li>
+                )
+            })}
+            </ul>
+        </div>
+    )
 }
 
 function BarrelDetails(props) {
+    console.log(props.whiskeyData);
     let {barrelId} = useParams();
-    const whiskey = props.whiskeyData[parseInt(barrelId)];
+    const wDataFlattened = Object.keys(props.whiskeyData).reduce((acc, key) => {
+        acc.push(props.whiskeyData[key]);
+        return acc;
+    }, []).flat();
+    const whiskey = wDataFlattened.find(w => w.tokenId === parseInt(barrelId));
 
     return (
         <>
@@ -62,9 +94,6 @@ function BarrelDetails(props) {
 
 function BarrelCard(props) {
     const wData = props.whiskey;
-    function handleBarrelClick(barrelId){
-        console.log(barrelId);
-    }
 
     return (
         <div className='barrel-card'>

@@ -6,3 +6,6 @@
     justify-content: center;
     background-color: var(--contrast-color);
 }
+#footer p{
+    color: var(--light-color) !important;
+}
