@@ -34,12 +34,12 @@ function Home() {
                 <img src='/images/barrelHouse.jpg' alt='distillery' />
             </div>
             <div className='how-it-works-detail detail-lg'>
-                <p className='number'>2. </p><p>Distillery creates an amazing single barrel whiskey and creates a listing in the Whiskey Guild.</p>
+                <p className='number'>2. </p><p>2.	The distillery determines the initial per bottle price, lifetime maintenance fees, and estimated matured value. It then lists this information on WhiskeyGuild and offers up to 70% of the barrel to investors.</p>
             </div>
         </div>
         <div className='flex how-it-works-wrapper'>
             <div className='how-it-works-detail detail-lg'>
-                <p className='number'>3. </p><p>Distillery creates an amazing single barrel whiskey and creates a listing in the Whiskey Guild.</p>
+                <p className='number'>3. </p><p>3.	Investors purchase shares of the barrel on a per-bottle basis using Ethereum (ETH) or another compatible cryptocurrency. In addition to the cost of the bottles, investors pay a percentage of the lifetime maintenance fee equal to the percentage of the barrel they own.</p>
             </div>
             <div className='how-it-works-detail detail-md'>
                 <img src='/images/barrelTruck.jpg' alt='distillery' />
@@ -52,7 +52,7 @@ function Home() {
                 <img src='/images/limousiin.jpg' alt='distillery' />
             </div>
             <div className='how-it-works-detail detail-lg'>
-                <p className='number'>4. </p><p>Distillery creates an amazing single barrel whiskey and creates a listing in the Whiskey Guild.</p>
+                <p className='number'>4. </p><p>4.	Investors can track the present value of their bottles on our website and receive annual updates on the barrel from the distillery. Investments appreciate following the function:</p>
             </div>
         </div>
         <div className='flex how-it-works-wrapper'>
@@ -60,7 +60,7 @@ function Home() {
                 <img src='/images/rye55.jpg' alt='distillery' />
             </div>
             <div className='how-it-works-detail detail-lg'>
-                <p className='number'>5. </p><p>Distillery creates an amazing single barrel whiskey and creates a listing in the Whiskey Guild.</p>
+                <p className='number'>5. </p><p>5.	Investors have up to four options to liquidate their investment: They can sell the bottles back to the distillery for the initial price, redeem each token for a bottle of the matured whiskey, sell the tokens on a secondary market such as opensea.io, or participate in an optional sellback program that the distillery can elect to offer.</p>
             </div>
             <div className='how-it-works-detail detail-sm'></div>
         </div>
