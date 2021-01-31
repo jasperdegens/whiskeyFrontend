@@ -2,13 +2,16 @@ import '../styles/WhiskeyDetails.css';
 import Chart from 'chart.js';
 import Button from 'react-bootstrap/Button';
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
+import { useWhiskeyContracts } from '../hooks/useWhiskeyContracts';
+import { useBarrelQuery } from '../hooks/useContractRequest';
 
 // WhiskeyDetails props = whiskey schema 
 function WhiskeyListing(props) {
-    console.log(props.whiskeyData);
-    const whiskeyData = props.whiskeyData;
     
+    const [whiskeyPlatform, barrelHouse] = useWhiskeyContracts();
+    const whiskeyData = props.whiskeyData;
+    const [totalBottles, bottlePrice] = useBarrelQuery(whiskeyData.tokenId);
     function formatDate(date){
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     }
@@ -32,23 +35,24 @@ function WhiskeyListing(props) {
     //     { year: whiskeyData.inceptionDate.getFullYear(), price: whiskeyData.startPrice },
     //     { year: whiskeyData.matureDate.getFullYear(), price: whiskeyData.endPrice }
     // ];
-
-    const priceData = createLinearData(
-        [whiskeyData.inceptionDate.getFullYear(), whiskeyData.matureDate.getFullYear()],
-        [whiskeyData.startPrice, whiskeyData.endPrice],
-        1
-    );
-
-    const feeData = createLinearData(
-        [whiskeyData.inceptionDate.getFullYear(), whiskeyData.matureDate.getFullYear()],
-        [whiskeyData.feesPerBottle, 0],
-        1
-    );
-
-    console.log(priceData);
-
+    
     // add in charts after mount
     useEffect(() => {
+        if(!bottlePrice)
+            return;
+
+
+        const priceData = createLinearData(
+            [whiskeyData.inceptionDate.getFullYear(), whiskeyData.matureDate.getFullYear()],
+            [bottlePrice[0] / 100, whiskeyData.endPrice],
+            1
+        );
+    
+        const feeData = createLinearData(
+            [whiskeyData.inceptionDate.getFullYear(), whiskeyData.matureDate.getFullYear()],
+            [whiskeyData.feesPerBottle, 0],
+            1
+        );
         // add price chart
         const priceCtx = document.getElementById('price-chart').getContext('2d');
         new Chart(priceCtx, {
@@ -179,7 +183,7 @@ function WhiskeyListing(props) {
             }
         });
 
-    });
+    }, [bottlePrice]);
 
 
     return (
@@ -226,7 +230,8 @@ function WhiskeyListing(props) {
                 />
                 <UnderLabelTextField 
                     name='Total Bottles'
-                    value={whiskeyData.bottleYield + ' Bottles'}
+                    isLoading={!totalBottles}
+                    value={totalBottles  + ' Bottles'}
                 />
             </div>
             <div className='header-label margin-label'>
@@ -271,11 +276,13 @@ function WhiskeyListing(props) {
             <div className='label-group'>
                 <UnderLabelTextField 
                     name='Current Price Per Bottle'
-                    value={`$${whiskeyData.startPrice.toFixed(2)}`}
+                    isLoading={!bottlePrice}
+                    value={!!bottlePrice ?  `$${(bottlePrice[0] / 100).toFixed(2)}` : ""}
                 />
                 <UnderLabelTextField 
                     name='Lifetime Fees Per Bottle'
-                    value={`$${whiskeyData.feesPerBottle.toFixed(2)}`}
+                    isLoading={!bottlePrice}
+                    value={!!bottlePrice ?  `$${(bottlePrice[1] / 100).toFixed(2)}` : ""}
                 />
             </div>
             <div className='header-label margin-label'>
@@ -295,7 +302,12 @@ function UnderLabelTextField(props) {
     
     return (
         <div className='under-label-wrapper'>
-            <p className='label-value'>{props.value}</p>
+            <p className='label-value'>
+                {props.isLoading ? 
+                (<Spinner animation="grow" size="sm"></Spinner>) : 
+                props.value
+            }
+            </p>
             <div className='line'></div>
             <p className='under-label'>{props.name}</p>
         </div>
