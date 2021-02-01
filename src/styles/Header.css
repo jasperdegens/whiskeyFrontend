@@ -44,7 +44,7 @@ nav.navbar{
     text-align: left;
 }
 
-button{
+nav.navbar button{
     color: white !important;
     border-color: #ffffff !important;
 }

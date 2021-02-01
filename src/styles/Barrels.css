@@ -1,5 +1,5 @@
-#whiskey-type-wrapper{
-    margin-bottom: 4em;
+.whiskey-type-wrapper{
+    margin-bottom: 3em;
 }
 
 #whiskey-type-nav ul{
@@ -29,17 +29,20 @@
 .barrel-img-wrapper{
     flex: 0 0 100%;
     position: relative;
+    background-size: cover;
+    background-position: center;
+    background-size: cover !important;
+    background-position: center !important;
+    min-height: 350px;
 }
 
-.barrel-img-wrapper img{
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    object-position: center;
-}
 
 .barrel-listing{
     flex-direction: column;
+}
+
+.barrel-title h4{
+    color: var(--dark-color);
 }
 
 .barrel-title h5{
@@ -103,7 +106,7 @@
 
         
     .barrel-details>div{
-        padding: 0.5em 2em;
+        padding: 1.5em 2em 0.5em;
     }
 
 }

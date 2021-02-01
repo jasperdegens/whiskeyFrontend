@@ -1,71 +1,149 @@
 import { useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import Chart from 'chart.js';
+import { whiskeyDataFlattened } from '../data/whiskeyData';
+import { Link } from 'react-router-dom';
 import UnderLabelTextField from './UnderLabelTextField';
 import '../styles/Dashboard.css'
 
+const testReleaseDate = (new Date(2023, 0, 0)).getTime() / 1000;
+
 const sampleData = [
-    {id: 0, name: 'Rye #39', bottles: 5},
-    {id: 1, name: 'Rye #40', bottles: 2},
-    {id: 2, name: 'Rye #44', bottles: 1},
-    {id: 3, name: 'Rye #56', bottles: 3}
+    {id: 0, name: 'Rye #39', bottles: 5, releaseDate: testReleaseDate },
+    {id: 2, name: 'Rye #44', bottles: 1, releaseDate: testReleaseDate },
+    {id: 1, name: 'Rye #40', bottles: 2, releaseDate: testReleaseDate },
+    {id: 3, name: 'Rye #56', bottles: 3, releaseDate: testReleaseDate }
 ];
 
 
 function Dashboard() {
 
 
+    const whiskeyActions = sampleData.map(d => (
+        <WhiskeyAction
+            key={d.id}
+            wData={d}
+        />
+    ));
 
 
     return (
         <div id='barrel-bg'>
             <div className='container'>
-                <h2>Dashboard</h2>
-                <ReleaseCountdownGroup countdownData={sampleData} />
-
+                <div className='dashboard-section'>
+                    <div className='header-label margin-label'>
+                        <h3 className='header-title'>Whiskey Portfolio</h3>
+                    </div> 
+                    <PortfolioChart 
+                        inventory={sampleData}
+                    />
+                    <InvestmentSummary 
+                        totalPaid={450}
+                        totalBottles={10}
+                        currentBottleValue={530}
+                        finalBottleValue={570}
+                    />
+                </div>
+                <div className='dashboard-section'>
+                    <div className='header-label margin-label'>
+                        <h3 className='header-title'>Whiskey Actions</h3>
+                    </div> 
+                    <div className='whiskey-action-wrapper'>
+                        {whiskeyActions}
+                    </div>
+                </div>
+                
+                <div className='header-label margin-label'>
+                    <h3 className='header-title'>Latest Distillers Notes</h3>
+                </div> 
 
             </div>
         </div>
     )
 }
 
-function ReleaseCountdownGroup(props) {
+function WhiskeyAction(props) {
+    
+    const wData = props.wData;
+    const tokenId = wData.id;
+    const whiskeyName = wData.name;
+    const releaseDate = wData.releaseDate;
+    const bottles = wData.bottles;
 
-    const countdowns = props.countdownData.map((d, i) => {
-        return (
-            <ReleaseCountdown
-                key={d.id}
-                name={d.name}
-                releaseDate={Math.floor((new Date(2025 + i, 1 + i, 1 + i, i, i * 2).getTime() / 1000))}
-            />
-        )
-    });
+    const dbWhiskeyData = whiskeyDataFlattened.find(w => w.tokenId === tokenId);
+
+    const startPrice = 35;
+    const sellbackAmount = 2;
+
+    const maxSellback = Math.min(sellbackAmount, bottles);
+
+    const isReleased = Date.now() - releaseDate * 1000 > 0;
+
 
     return (
-        <div className='release-countdown-wrapper'>
-            <div className='header-label margin-label'>
-                <h3 className='header-title'>Release Countdown</h3>
-            </div> 
-            {countdowns}
-            <div className='header-label margin-label'>
-                <h3 className='header-title'>Whiskey Portfolio</h3>
-            </div> 
-            <PortfolioChart 
-                inventory={sampleData}
-            />
-            <InvestmentSummary 
-                totalPaid={450}
-                totalBottles={10}
-                currentBottleValue={530}
-                finalBottleValue={570}
-            />
-            <div className='header-label margin-label'>
-                <h3 className='header-title'>Latest Distillers Notes</h3>
-            </div> 
+        <div className='barrel-card'>
+            <div className='barrel-listing flex'>
+                <div 
+                    className='barrel-img-wrapper'
+                    style={{background: `url(${dbWhiskeyData.img})`}}    
+                >
+                </div>
+                <div className='barrel-details'>
+                    <div className='barrel-title'>
+                        <Link to={`/barrels/${wData.id}`}>
+                            <h4>{dbWhiskeyData.name}</h4>
+                        </Link>
+                        <h5>{dbWhiskeyData.distillery}</h5>
+                    </div>
+                    <div className='whiskey-action flex'>
+                        <Form.Control 
+                            variant={'outline-success' }
+                            value={bottles}
+                            disabled
+                            >
+                        </Form.Control>
+                        <h6>Bottle{bottles === 1 ? '' : 's'} Owned</h6>
+                    </div>
+                    <div className='whiskey-action flex'>
+                        <Button 
+                            variant={isReleased ? 'success' : 'outline-secondary' }
+
+                            disabled={!isReleased}
+                        >
+                            Redeem
+                        </Button>
+                        {/* <p>Redemption available in:&nbsp;</p> */}
+                        <ReleaseCountdown
+                            releaseDate={releaseDate}
+                            loading={false}
+                            text={'until redemption.'}
+                        />
+                    </div>
+                    <div className='whiskey-action flex'>
+                        <Button
+                            variant='info'
+                        >
+                            Sellback
+                        </Button>
+                        <p>{maxSellback} bottles eligable to sellback.</p>
+                    </div>
+                    <div className='whiskey-action flex'>
+                        <Button
+                            variant='primary'
+                        >
+                            Refund
+                        </Button>
+                        <p>Receive initial price of ${startPrice.toFixed(2)} per bottle.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     )
-}
 
+
+}
 
 function ReleaseCountdown(props) {
 
@@ -82,7 +160,6 @@ function ReleaseCountdown(props) {
         return [days, hours, minutes, seconds];
     }
 
-    const whiskeyName = props.name;
     const releaseDate = props.releaseDate;
     const isLoading = props.loading;
     //const countdownTime = !!releaseDate ? countDownTime(releaseDate * 1000, currTime) : '';
@@ -98,10 +175,9 @@ function ReleaseCountdown(props) {
 
     return (
         <div className='release-countdown flex'>
-            <p>{whiskeyName}</p>
             { timeRemaining[0] === undefined || isLoading ? 
                 <Spinner animation='grow' size='sm' /> : 
-                <p>{`${timeRemaining[0]}d ${timeRemaining[1]}h ${timeRemaining[2]}m ${timeRemaining[3]}s`}</p>}
+                <p>{`${timeRemaining[0]}d ${timeRemaining[1]}h ${timeRemaining[2]}m ${timeRemaining[3]}s ${props.text}`}</p>}
         </div>
     )
 

@@ -1,7 +1,32 @@
+.whiskey-action-wrapper .barrel-card img {
+    max-height: 100%;
+}
 
+.whiskey-action{
+    align-items: center;
+    margin: 1.5em 0;
+}
 
+.whiskey-action button, .whiskey-action input{
+    flex: 0 0 25%;
+    margin-right: 1em;
+    text-align: center;
+}
 
-.release-countdown-wrapper{
+.whiskey-action input:disabled{
+    background-color: white;
+}
+
+.whiskey-action p{
+    margin: 0;
+    font-size: 1.25em;
+}
+
+.whiskey-action h6{
+    margin: 0;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 .release-countdown{

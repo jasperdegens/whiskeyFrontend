@@ -8,15 +8,24 @@ const useRequest = (contract, reqName, params) => {
 
     useEffect(() => {
         async function makeRequest(){
-            const res = await contract[reqName](...params);
-            setResult((res));
-            console.log(res);
+            try{
+                const res = await contract[reqName](...params);
+                setResult((res));
+                console.log(res);
+            }catch (err){
+                console.log(err);
+            }
         }
 
         if(contract === undefined){
             setResult(undefined);
         }else{
-            makeRequest();
+            try{
+                makeRequest();
+            }
+            catch{
+                console.log("Error fetching data....");
+            }
         }
 
     }, [contract, reqName, params]);

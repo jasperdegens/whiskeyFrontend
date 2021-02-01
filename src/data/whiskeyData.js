@@ -300,4 +300,9 @@ const whiskeyData = {
     'special': [Special50, Special51 ] 
 };
 
-export default whiskeyData;
+const whiskeyDataFlattened = Object.keys(whiskeyData).reduce((acc, key) => {
+    acc.push(whiskeyData[key]);
+    return acc;
+}, []).flat();
+
+export { whiskeyData, whiskeyDataFlattened };
