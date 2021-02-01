@@ -85,16 +85,15 @@ const rye39 = {
     feesPerBottle: 5
 };
 
-
 const rye40 = {
-    name: 'Straight Rye',
+    name: 'Peach Rock and Rye Barrel',
     tokenId: 2,
     distillery: 'Stone Barn',
-    whiskeyType: 'Straight Rye',
+    whiskeyType: 'Rock and Rye',
     distilleryAddress: '0x9192',
     img: '/images/StraightRye.jpg',
-    caskProof: 130,
-    bottleProof: 90,
+    caskProof: 110,
+    bottleProof: 66,
     bottleYield: 210,
     barrelVolume: 180,
     flavorProfile: testFlavorProfile,
@@ -105,9 +104,56 @@ const rye40 = {
     inceptionDate: new Date(2020, 1, 1),
     matureDate: new Date(2025, 1, 1),
     startPrice: 25,
+    endPrice: 40,
+    feesPerBottle: 5
+};
+
+const rye41 = {
+    name: 'Straight Rye Barrel #58',
+    tokenId: 2,
+    distillery: 'Stone Barn',
+    whiskeyType: 'Straight Rye',
+    distilleryAddress: '0x9192',
+    img: '/images/StraightRye.jpg',
+    caskProof: 115,
+    bottleProof: 94,
+    bottleYield: 210,
+    barrelVolume: 180,
+    flavorProfile: testFlavorProfile,
+    mashBill: '56% Dark Rye, 44% Rye Malt',
+    barrelWood: 'Missouri Oak',
+    barrelChar: 'Char with Charred Heads',
+    distillersNotes: 'Very rich and sweet aroma, old fashioned root beer and vanilla cream soda. Abundant rye character on the palate, herbal, peppery notes and tart red fruit with dark caramel and salted buttercream. Long finish.',
+    inceptionDate: new Date(2021, 1, 1),
+    matureDate: new Date(2026, 1, 1),
+    startPrice: 25,
     endPrice: 50,
     feesPerBottle: 5
 };
+
+const rye42 = {
+    name: 'Straight Rye Barrel #58',
+    tokenId: 2,
+    distillery: 'Stone Barn',
+    whiskeyType: 'Straight Rye',
+    distilleryAddress: '0x9192',
+    img: '/images/StraightRye.jpg',
+    caskProof: 104,
+    bottleProof: 90,
+    bottleYield: 210,
+    barrelVolume: 180,
+    flavorProfile: testFlavorProfile,
+    mashBill: '56.1% Dark Rye, 33.9% Oat',
+    barrelWood: 'Missouri Oak',
+    barrelChar: 'Char with Charred Heads',
+    distillersNotes: 'Dry and woodsy on the nose with a bready pumpernickel character and some fruity berry notes. Sweeter on the palate, clear oatmeal cookies and bourbon barrel oakiness, with a bright finish.',
+    inceptionDate: new Date(2021, 1, 1),
+    matureDate: new Date(2025, 6, 6),
+    startPrice: 30,
+    endPrice: 60,
+    feesPerBottle: 5
+};
+
 
 const Bourbon42 = {
     name: 'Straight Bourbon Barrel #42',
@@ -177,6 +223,53 @@ const Bourbon44 = {
     endPrice: 70,
     feesPerBottle: 5
 };
+
+const Bourbon74 = {
+    name: 'Straight Bourbon Barrel Barrel #74',
+    tokenId: 5,
+    distillery: 'Stone Barn',
+    whiskeyType: 'Straight Bourbon',
+    distilleryAddress: '0x9192',
+    img: '/images/corn44.jpg',
+    caskProof: 114,
+    bottleProof: 111,
+    bottleYield: 240,
+    barrelVolume: 180,
+    flavorProfile: testFlavorProfile,
+    mashBill: '60% Corn, 14% Dark Rye, 10% Soft White Wheat, 10% Millet, 6% Barley Malt',
+    barrelWood: 'American Oak',
+    barrelChar: 'Heavy Char',
+    distillersNotes: 'Like a blackberry pie, buttery pastry crusts with warm cinnamon and blackberries. Palate is similar to nose, with touches of coconut, caramel, and green apple.',
+    inceptionDate: new Date(2021, 1, 1),
+    matureDate: new Date(2024, 6, 6),
+    startPrice: 25,
+    endPrice: 50,
+    feesPerBottle: 5
+};
+
+const Bourbon88 = {
+    name: 'Straight Bourbon Barrel Barrel #88',
+    tokenId: 5,
+    distillery: 'Stone Barn',
+    whiskeyType: 'Straight Bourbon',
+    distilleryAddress: '0x9192',
+    img: '/images/corn44.jpg',
+    caskProof: 114,
+    bottleProof: 109,
+    bottleYield: 240,
+    barrelVolume: 180,
+    flavorProfile: testFlavorProfile,
+    mashBill: '54.6% Corn, 12.5% Dark Rye, 32.9% Malted Barley',
+    barrelWood: 'White Oak',
+    barrelChar: 'Heavy Char',
+    distillersNotes: 'Very bright, dynamic nose with apricots, bananas, caramel apple pops, and malty beer. The palate is quite a contrast, spicy and earthy with nut brittle and salted walnuts, big evolution of flavors in the finish.',
+    inceptionDate: new Date(2021, 1, 1),
+    matureDate: new Date(2024, 1, 1),
+    startPrice: 30,
+    endPrice: 55,
+    feesPerBottle: 5
+};
+
 
 const Blend46 = {
     name: 'Hopping Eights Barrel #46',
@@ -293,11 +386,34 @@ const Special51 = {
     feesPerBottle: 5
 };
 
+const Special52 = {
+    name: 'Straight Millet Barrel',
+    tokenId: 10,
+    distillery: 'Stone Barn',
+    whiskeyType: 'Straight Millet',
+    distilleryAddress: '0x9192',
+    img: '/images/Spelt.jpg',
+    caskProof: 119,
+    bottleProof: 107,
+    bottleYield: 150,
+    barrelVolume: 180,
+    flavorProfile: testFlavorProfile,
+    mashBill: '65% Millet, 22.5% Wheat, 12.5% Dark Rye',
+    barrelWood: 'Missouri Oak',
+    barrelChar: 'Heavy Char',
+    distillersNotes: 'Closer to a classic bourbon nose, sweet vanilla frosting on a caramel cupcake. Big fruitiness, with baked peaches and apricots, spicy cinnamon and pepper corns, and a dense mouthfeel with strong barral character.',
+    inceptionDate: new Date(2021, 1, 1),
+    matureDate: new Date(2025, 2, 2),
+    startPrice: 25,
+    endPrice: 70,
+    feesPerBottle: 5
+};
+
 const whiskeyData = {
-    'rye': [rye38, rye39, rye40 ],
-    'bourbon': [Bourbon42, Bourbon43, Bourbon44 ],
+    'rye': [rye38, rye39, rye40, rye41, rye42  ],
+    'bourbon': [Bourbon42, Bourbon43, Bourbon44, Bourbon74, Bourbon88 ],
     'blend': [Blend46, Blend47, Blend48 ],
-    'special': [Special50, Special51 ] 
+    'special': [Special50, Special51, Special52 ] 
 };
 
 export default whiskeyData;
