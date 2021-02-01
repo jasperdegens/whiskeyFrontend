@@ -101,7 +101,7 @@ function BarrelCard(props) {
                 to={`${props.match.url}/${wData.tokenId}`}>
                 <div className='barrel-listing flex'>
                     <div className='barrel-img-wrapper'>
-                        <img alt={wData.name} src='/images/rye55.jpg' />
+                        <img alt={wData.name} src={wData.img} />
                     </div>
                     <div className='barrel-details'>
                         <div className='barrel-title'>
@@ -112,7 +112,7 @@ function BarrelCard(props) {
                             <p>{wData.distillersNotes}</p>
                         </div>
                         <div className='price'>
-                            <Button>Information</Button>
+                            <Button>Details</Button>
                         </div>
                     </div>
                 </div>

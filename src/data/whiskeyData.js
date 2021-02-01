@@ -39,11 +39,12 @@ const testFlavorProfile = {
 }
 
 const rye38 = {
-    name: 'Rye Barrel #38',
+    name: 'Limousin Rye',
     tokenId: 0,
     distillery: 'Stone Barn',
     whiskeyType: 'Limousin Rye',
     distilleryAddress: '0x9192',
+    img: '/images/limousiin.jpg',
     caskProof: 120,
     bottleProof: 90,
     bottleYield: 250,
@@ -62,12 +63,13 @@ const rye38 = {
 
 
 const rye39 = {
-    name: 'Rye Barrel #39',
+    name: 'Dark Roast Rye Barrel #55',
     tokenId: 1,
     distillery: 'Stone Barn',
     whiskeyType: 'Dark Roast Rye',
     mashBill: '80% Rye, 20% Wheat',
     distilleryAddress: '0x9192',
+    img: '/images/rye55.jpg',
     caskProof: 110,
     bottleProof: 92,
     bottleYield: 250,
@@ -85,11 +87,12 @@ const rye39 = {
 
 
 const rye40 = {
-    name: 'Rye Barrel #40',
+    name: 'Straight Rye',
     tokenId: 2,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Rye',
     distilleryAddress: '0x9192',
+    img: '/images/StraightRye.jpg',
     caskProof: 130,
     bottleProof: 90,
     bottleYield: 210,
@@ -106,34 +109,13 @@ const rye40 = {
     feesPerBottle: 5
 };
 
-const rye41 = {
-    name: 'Rye Barrel #41',
-    tokenId: 3,
-    distillery: 'Stone Barn',
-    whiskeyType: 'Peach Rock and Rye',
-    distilleryAddress: '0x9192',
-    caskProof: 120,
-    bottleProof: 66,
-    bottleYield: 240,
-    barrelVolume: 180,
-    flavorProfile: testFlavorProfile,
-    mashBill: '100% Rye, 120 Pounds of Peaches',
-    barrelWood: 'Mississippi Oak',
-    barrelChar: 'Medium Toast',
-    distillersNotes: 'Rock & Rye is a whiskey-based liqueur that was more common pre-prohibition, rock candy being used to improve a lesser rye perhaps. We wash and cut 120 pounds of peaches, then shove them into the bung holes of oak barrels that contain our organic rye and then age the spirit.',
-    inceptionDate: new Date(2021, 1, 1),
-    matureDate: new Date(2025, 1, 1),
-    startPrice: 40,
-    endPrice: 85,
-    feesPerBottle: 5
-};
-
 const Bourbon42 = {
-    name: 'Bourbon Barrel #42',
+    name: 'Straight Bourbon Barrel #42',
     tokenId: 3,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Bourbon',
     distilleryAddress: '0x9192',
+    img: '/images/StraightBourbon.jpg',
     caskProof: 120,
     bottleProof: 94,
     bottleYield: 240,
@@ -151,11 +133,12 @@ const Bourbon42 = {
 };
 
 const Bourbon43 = {
-    name: 'Bourbon Barrel #43',
-    tokenId: 3,
+    name: 'Bourbon Barrel Barrel #43',
+    tokenId: 4,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Bourbon',
     distilleryAddress: '0x9192',
+    img: '/images/StraightBourbon2.jpg',
     caskProof: 120,
     bottleProof: 94,
     bottleYield: 240,
@@ -173,33 +156,12 @@ const Bourbon43 = {
 };
 
 const Bourbon44 = {
-    name: 'Bourbon Barrel #44',
-    tokenId: 3,
+    name: 'Bourbon Barrel Barrel #44',
+    tokenId: 5,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Bourbon',
     distilleryAddress: '0x9192',
-    caskProof: 120,
-    bottleProof: 94,
-    bottleYield: 240,
-    barrelVolume: 180,
-    flavorProfile: testFlavorProfile,
-    mashBill: '59% Corn, 29% Wheat, 12% Dark Rye',
-    barrelWood: 'American Oak',
-    barrelChar: 'Medium Toast',
-    distillersNotes: 'The bourbon was bottled without chill-filtration. The resultant whiskey is bright and approachable, with abundant fruit and caramel notes and an elegant, full mouthfeel.This one uses all organic PNW grown grains.',
-    inceptionDate: new Date(2021, 1, 1),
-    matureDate: new Date(2026, 6, 6),
-    startPrice: 30,
-    endPrice: 70,
-    feesPerBottle: 5
-};
-
-const Bourbon45 = {
-    name: 'Bourbon Barrel #45',
-    tokenId: 3,
-    distillery: 'Stone Barn',
-    whiskeyType: 'Straight Bourbon',
-    distilleryAddress: '0x9192',
+    img: '/images/corn44.jpg',
     caskProof: 120,
     bottleProof: 94,
     bottleYield: 240,
@@ -217,11 +179,12 @@ const Bourbon45 = {
 };
 
 const Blend46 = {
-    name: 'Hopping Eights #46',
-    tokenId: 3,
+    name: 'Hopping Eights Barrel #46',
+    tokenId: 6,
     distillery: 'Stone Barn',
     whiskeyType: 'Blended Whiskey',
     distilleryAddress: '0x9192',
+    img: '/images/HoppinEights.jpg',
     caskProof: 110,
     bottleProof: 90,
     bottleYield: 240,
@@ -239,11 +202,12 @@ const Blend46 = {
 };
 
 const Blend47 = {
-    name: 'Barnstormer #47',
-    tokenId: 3,
+    name: 'Barnstormer Barrel #47',
+    tokenId: 7,
     distillery: 'Stone Barn',
     whiskeyType: 'Imperial Red Single Malt Whiskey',
     distilleryAddress: '0x9192',
+    img: '/images/Barnstormer.jpg',
     caskProof: 110,
     bottleProof: 92,
     bottleYield: 240,
@@ -262,32 +226,11 @@ const Blend47 = {
 
 const Blend48 = {
     name: 'Blended Barrel #48',
-    tokenId: 3,
+    tokenId: 8,
     distillery: 'Stone Barn',
     whiskeyType: 'Blended Whiskey',
     distilleryAddress: '0x9192',
-    caskProof: 110,
-    bottleProof: 110,
-    bottleYield: 150,
-    barrelVolume: 180,
-    flavorProfile: testFlavorProfile,
-    mashBill: '86% Malted Barley, 14% Malted Rye',
-    barrelWood: 'American Oak',
-    barrelChar: 'Medium Toast',
-    distillersNotes: 'Spicey nose, traces of cloves and nutmeg, with a long tail of caramel and ground pepper.',
-    inceptionDate: new Date(2021, 1, 1),
-    matureDate: new Date(2030, 1, 1),
-    startPrice: 50,
-    endPrice: 160,
-    feesPerBottle: 5
-};
-
-const Blend49 = {
-    name: 'Blended Barrel #49',
-    tokenId: 3,
-    distillery: 'Stone Barn',
-    whiskeyType: 'Blended Whiskey',
-    distilleryAddress: '0x9192',
+    img: '/images/barrels.jpg',   
     caskProof: 110,
     bottleProof: 110,
     bottleYield: 150,
@@ -305,11 +248,12 @@ const Blend49 = {
 };
 
 const Special50 = {
-    name: 'Oat #50',
-    tokenId: 3,
+    name: 'Straight Oat Barrel #50',
+    tokenId: 9,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Oat',
     distilleryAddress: '0x9192',
+    img: '/images/StraightOat.jpg',
     caskProof: 110,
     bottleProof: 90,
     bottleYield: 150,
@@ -327,11 +271,12 @@ const Special50 = {
 };
 
 const Special51 = {
-    name: 'Spelt #49',
-    tokenId: 3,
+    name: 'Spelt Barrel #49',
+    tokenId: 10,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Spelt',
     distilleryAddress: '0x9192',
+    img: '/images/Spelt.jpg',
     caskProof: 110,
     bottleProof: 100,
     bottleYield: 150,
@@ -349,10 +294,10 @@ const Special51 = {
 };
 
 const whiskeyData = {
-    'rye': [rye38, rye39, rye40, rye41 ],
-    'bourbon': [Bourbon42, Bourbon43, Bourbon44, Bourbon45 ],
-    'blend': [Blend46, Blend47, Blend48, Blend49 ],
-    'special': [Special50, Special51, Special50, Special50 ] 
+    'rye': [rye38, rye39, rye40 ],
+    'bourbon': [Bourbon42, Bourbon43, Bourbon44 ],
+    'blend': [Blend46, Blend47, Blend48 ],
+    'special': [Special50, Special51 ] 
 };
 
 export default whiskeyData;
