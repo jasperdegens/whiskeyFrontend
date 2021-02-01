@@ -2,7 +2,7 @@ import '../styles/WhiskeyDetails.css';
 import Chart from 'chart.js';
 import Button from 'react-bootstrap/Button';
 import React, { useEffect } from 'react';
-import Spinner from 'react-bootstrap/Spinner';
+import UnderLabelTextField from './UnderLabelTextField';
 import Form from 'react-bootstrap/Form';
 import { useBarrelQuery } from '../hooks/useContractRequest';
 
@@ -284,21 +284,6 @@ function WhiskeyListing(props) {
     );
 }
 
-function UnderLabelTextField(props) {
-    
-    return (
-        <div className='under-label-wrapper'>
-            <div className='label-value'>
-                {props.isLoading ? 
-                (<Spinner animation="grow" size="sm"></Spinner>) : 
-                props.value
-            }
-            </div>
-            <div className='line'></div>
-            <p className='under-label'>{props.name}</p>
-        </div>
-    )
-}
 
 function UnderLabelInput(props) {
     return (

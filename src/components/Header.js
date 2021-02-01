@@ -24,7 +24,7 @@ function Header() {
     return (
         <header>
             <div id='title'>
-                <h1>WHISKEY MarketMaker</h1>
+                <h1>Whiskey MarketMaker</h1>
                 <h2>Barrel Level Access to Craft Distilleries</h2>
             </div>
             <Navbar sticky="top" expand="md">
