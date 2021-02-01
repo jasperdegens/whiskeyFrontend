@@ -133,11 +133,14 @@
 .under-label{
     color: var(--secondary-color);
 }
-
 .chart-wrapper{
     width: 50%;
     position: relative;
     text-align: left;
+}
+
+.chart-wrapper-full{
+    width: 100%;
 }
 
 .flex-chart{

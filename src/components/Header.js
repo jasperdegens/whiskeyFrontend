@@ -24,12 +24,12 @@ function Header() {
     return (
         <header>
             <div id='title'>
-                <h1>WHISKEY GUILD</h1>
+                <h1>WHISKEY MarketMaker</h1>
                 <h2>Barrel Level Access to Craft Distilleries</h2>
             </div>
             <Navbar sticky="top" expand="md">
                 <div className='container'>
-                    {/* <Navbar.Brand href="#home">Whiskey Invest</Navbar.Brand> */}
+                    {/* <Navbar.Brand href="#home">Whiskey MarketMaker</Navbar.Brand> */}
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto" as='ul'>

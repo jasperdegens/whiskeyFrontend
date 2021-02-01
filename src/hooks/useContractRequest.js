@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import { useContracts } from './useContracts';
+import { useWeb3React } from '@web3-react/core';
 
 const useRequest = (contract, reqName, params) => {
 
@@ -25,18 +26,20 @@ const useRequest = (contract, reqName, params) => {
 
 
 const useBarrelQuery = (id) => {
+    
+    const [whiskeyPlatform, barrelHouse] = useContracts();
+    const { account } = useWeb3React();
 
     // need to create array that does not change
     const [idParam, setIdParam] = useState([id]);
-    const [priceParams, setPriceParams] = useState([id, Date.now()]);
-
-    const [whiskeyPlatform, barrelHouse] = useContracts();
+    const [ownedParams, setOwnedParams] = useState([account, id])
 
     const totalBottles = useRequest(whiskeyPlatform, 'totalBottles', idParam)
-    const bottlePrice = useRequest(whiskeyPlatform, 'bottlePrice', priceParams);
+    const bottlePrice = useRequest(whiskeyPlatform, 'currentBottlePrice', idParam);
+    const ownedBottles = useRequest(barrelHouse, 'balanceOf', ownedParams);
+    const agingData = useRequest(whiskeyPlatform, 'barrelMaturationData', idParam);
 
-
-    return [totalBottles, bottlePrice];
+    return [totalBottles, bottlePrice, ownedBottles, agingData];
 
 
 }
