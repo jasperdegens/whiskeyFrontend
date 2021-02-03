@@ -4,24 +4,77 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Chart from 'chart.js';
 import { whiskeyDataFlattened } from '../data/whiskeyData';
+import { useContracts } from '../hooks/useContracts';
+import { useWeb3React } from '@web3-react/core';
 import { Link } from 'react-router-dom';
 import UnderLabelTextField from './UnderLabelTextField';
 import '../styles/Dashboard.css'
 
-const testReleaseDate = (new Date(2023, 0, 0)).getTime() / 1000;
+//const testReleaseDate = (new Date(2023, 0, 0)).getTime() / 1000;
 
-const sampleData = [
-    {id: 0, name: 'Rye #39', bottles: 5, releaseDate: testReleaseDate },
-    {id: 2, name: 'Rye #44', bottles: 1, releaseDate: testReleaseDate },
-    {id: 1, name: 'Rye #40', bottles: 2, releaseDate: testReleaseDate },
-    {id: 3, name: 'Rye #56', bottles: 3, releaseDate: testReleaseDate }
-];
+// const sampleData = [
+//     {id: 0, name: 'Rye #39', bottles: 5, releaseDate: testReleaseDate },
+//     {id: 2, name: 'Rye #44', bottles: 1, releaseDate: testReleaseDate },
+//     {id: 1, name: 'Rye #40', bottles: 2, releaseDate: testReleaseDate },
+//     {id: 3, name: 'Rye #56', bottles: 3, releaseDate: testReleaseDate }
+// ];
 
 
 function Dashboard() {
 
+    const [whiskeyInventory, setWhiskeyInventory] = useState(undefined);
+    const [whiskeyPlatform, barrelHouse] = useContracts();
+    const { account } = useWeb3React(); 
 
-    const whiskeyActions = sampleData.map(d => (
+    useEffect(() => {
+        
+        async function checkWhiskey(tokenId) {
+            const bottles = await barrelHouse.balanceOf(account, tokenId);
+            const bottlesOwned = bottles.toNumber();
+            if(bottlesOwned > 0) {
+                const [, endDate] = await whiskeyPlatform.barrelMaturationData(tokenId);
+                const dbData = whiskeyDataFlattened.find(w => w.tokenId === tokenId);
+                const newData = {
+                    id: tokenId,
+                    name: dbData.name,
+                    bottles: bottlesOwned,
+                    releaseDate: endDate.toNumber()
+                };
+                // setWhiskeyInventory(w => {
+                    //     console.log(w);
+                    //     return w.push(newData);
+                    // });
+                    return newData;
+                }
+            return null;
+        }
+        
+        async function getNumBarrels() {
+            
+            const numBarrels = await barrelHouse.getTotalBarrels();
+            const allOwned = [];
+            for(let i = 0; i < numBarrels; i++) {
+                const newData = await checkWhiskey(i);  
+                if(newData !== null) {
+                    allOwned.push(newData);
+                }
+            }
+            setWhiskeyInventory(allOwned);
+        }
+        
+
+        // clear old inventory
+        setWhiskeyInventory(undefined);
+        if(!barrelHouse || !whiskeyPlatform || !account)
+        {
+
+        }else{
+            getNumBarrels();
+        }
+
+    }, [barrelHouse, whiskeyPlatform, account])
+
+    const whiskeyActions = !whiskeyInventory || whiskeyInventory.length === 0 ? (<></>) : whiskeyInventory.map(d => (
         <WhiskeyAction
             key={d.id}
             wData={d}
@@ -37,7 +90,7 @@ function Dashboard() {
                         <h3 className='header-title'>Whiskey Portfolio</h3>
                     </div> 
                     <PortfolioChart 
-                        inventory={sampleData}
+                        inventory={whiskeyInventory}
                     />
                     <InvestmentSummary 
                         totalPaid={450}
@@ -65,10 +118,8 @@ function Dashboard() {
 }
 
 function WhiskeyAction(props) {
-    
     const wData = props.wData;
     const tokenId = wData.id;
-    const whiskeyName = wData.name;
     const releaseDate = wData.releaseDate;
     const bottles = wData.bottles;
 
@@ -203,12 +254,12 @@ function PortfolioChart(props) {
              return color;
         }
 
-        const data = whiskeyInventory.map(i => i.bottles);
-        const labels = whiskeyInventory.map(i => i.name);
-        const backgroundColors = whiskeyInventory.map(i => generateRandomHexColor());
-        console.log(backgroundColors);
+        const finalData = whiskeyInventory.length > 0 ? whiskeyInventory : [{bottles: 1, name: 'Thirsty Yet?'}];
+        const data = finalData.map(i => i.bottles);
+        const labels = finalData.map(i => i.name);
+        const backgroundColors = finalData.map(i => generateRandomHexColor());
         const donutCtx = document.getElementById('whiskey-inventory')
-        new Chart(donutCtx, {
+        const chart = new Chart(donutCtx, {
             type: 'doughnut',
             data: {
                 datasets: [{
@@ -222,13 +273,13 @@ function PortfolioChart(props) {
                     callbacks: {
                         label: function(toolTipItem) {
                             const idx = toolTipItem.index;
-                            return `${labels[idx]}: ${data[idx]} Bottles`;
+                            return whiskeyInventory.length > 0 ? `${labels[idx]}: ${data[idx]} Bottles` : 'Buy Some Whiskey!';
                         }
                     }
                 }
             }
         });
-
+        return () => { chart.destroy();}
     }, [whiskeyInventory])
 
 

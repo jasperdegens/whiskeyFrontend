@@ -18,6 +18,10 @@
     justify-content: center;
 }
 
+.flex-start{
+    align-items: flex-start;
+}
+
 body{
     background-color: var(--light-color);
     font-family: monospace;

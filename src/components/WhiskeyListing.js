@@ -1,8 +1,9 @@
 import '../styles/WhiskeyDetails.css';
 import Chart from 'chart.js';
 import Button from 'react-bootstrap/Button';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import UnderLabelTextField from './UnderLabelTextField';
+import OrderModal from './OrderModal';
 import Form from 'react-bootstrap/Form';
 import { useBarrelQuery } from '../hooks/useContractRequest';
 
@@ -10,7 +11,10 @@ import { useBarrelQuery } from '../hooks/useContractRequest';
 function WhiskeyListing(props) {
     
     const whiskeyData = props.whiskeyData;
-    const [totalBottles, bottlePrice, ownedBottles, agingData] = useBarrelQuery(whiskeyData.tokenId);
+    const [totalBottles, bottlePrice, ownedBottles, availableBottles, agingData] = useBarrelQuery(whiskeyData.tokenId);
+    const [bottlesToPurchase, setBottlesToPurchase] = useState(0);
+    const [modalShow, setModalShow] = useState(false);
+    
     function formatDate(date){
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     }
@@ -29,6 +33,13 @@ function WhiskeyListing(props) {
         }
         return finalData;
     }
+
+    function changePurchaseAmount(newAmount) {
+        const maxBottles = !!availableBottles ? availableBottles : 0;
+        const newVal = Math.floor(Math.max(0, Math.min(newAmount, maxBottles)));
+        setBottlesToPurchase(newVal);
+    }
+
 
     // const priceData = [
     //     { year: whiskeyData.inceptionDate.getFullYear(), price: whiskeyData.startPrice },
@@ -104,7 +115,7 @@ function WhiskeyListing(props) {
         console.log(currData);
         // add price chart
         const priceCtx = document.getElementById('price-chart').getContext('2d');
-        new Chart(priceCtx, {
+        const chart = new Chart(priceCtx, {
             type: 'line',
             data: {
                 labels: priceData[0],
@@ -163,10 +174,20 @@ function WhiskeyListing(props) {
 				}
             }
         });
+
+        return () => { chart.destroy(); }
     }, [bottlePrice, whiskeyData, agingData]);
 
 
     return (
+        <>
+        <OrderModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            tokenId={whiskeyData.tokenId}
+            numBottles={bottlesToPurchase}
+            totalPriceUsd={!bottlePrice ? 0 : `$${((bottlesToPurchase * (bottlePrice[0] + bottlePrice[3])) / 100).toFixed(2)}`}
+        />
         <div className='whiskey-details-wrapper'>
             
             <div className='sticker-label header-label margin-label'>
@@ -270,17 +291,53 @@ function WhiskeyListing(props) {
                     isLoading={!ownedBottles}
                     value={ownedBottles  + ' Bottles'}
                 />
-                <UnderLabelInput 
-                    name='Purchase'
-                    isLoading={!ownedBottles}
-                    value={ownedBottles  + ' Bottles'}
+                <UnderLabelTextField 
+                    name='Available Bottles'
+                    isLoading={!availableBottles}
+                    value={availableBottles  + ' Bottles'}
                 />
-                <Button>
-                    Purchase
-                </Button>
+            </div>
+            <div className='label-group flex-start'>
+                <div className='flex'>
+                    <div className='under-label-wrapper margin-none'>
+                        <Form.Control 
+                            type='number' 
+                            value={bottlesToPurchase}
+                            onChange={(e) => changePurchaseAmount(e.target.value)}
+                        />
+                        <div className='line'></div>
+                        <p className='under-label'>Purchase Quantity</p>
+                    </div>
+                    <div className='under-label-wrapper'>
+                        <Button 
+                            variant='outline-danger'
+                            className='purchase-change'
+                            onClick={() => changePurchaseAmount(bottlesToPurchase - 1)}
+                        >-</Button>
+                        <Button 
+                            variant='outline-success'
+                            className='purchase-change'
+                            onClick={() => changePurchaseAmount(bottlesToPurchase + 1)}
+                        >+</Button>
+                    </div>
+                </div>
+                <UnderLabelTextField 
+                    name='Total Price (bottle + fees)'
+                    value={!bottlePrice ? 0 : `$${((bottlesToPurchase * (bottlePrice[0] + bottlePrice[3])) / 100).toFixed(2)}`}
+                />
+                <div className='under-label-wrapper'>
+                    <Button 
+                        size='lg' 
+                        variant='info'
+                        onClick={() => setModalShow(true)}
+                    >
+                        Purchase
+                    </Button>
+                </div>
             </div>
 
         </div>
+        </>
     );
 }
 
@@ -288,7 +345,7 @@ function WhiskeyListing(props) {
 function UnderLabelInput(props) {
     return (
         <div className='under-label-wrapper'>
-            <Form.Control as='number' />
+            <Form.Control type='number' />
             <div className='line'></div>
             <p className='under-label'>{props.name}</p>
         </div>

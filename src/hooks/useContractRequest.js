@@ -40,15 +40,16 @@ const useBarrelQuery = (id) => {
     const { account } = useWeb3React();
 
     // need to create array that does not change
-    const [idParam, setIdParam] = useState([id]);
-    const [ownedParams, setOwnedParams] = useState([account, id])
+    const [idParam] = useState([id]);
+    const [ownedParams] = useState([account, id])
 
     const totalBottles = useRequest(whiskeyPlatform, 'totalBottles', idParam)
     const bottlePrice = useRequest(whiskeyPlatform, 'currentBottlePrice', idParam);
     const ownedBottles = useRequest(barrelHouse, 'balanceOf', ownedParams);
     const agingData = useRequest(whiskeyPlatform, 'barrelMaturationData', idParam);
+    const availableBottles = useRequest(whiskeyPlatform, 'availableBottles', idParam);
 
-    return [totalBottles, bottlePrice, ownedBottles, agingData];
+    return [totalBottles, bottlePrice, ownedBottles, availableBottles, agingData];
 
 
 }

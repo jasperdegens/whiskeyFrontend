@@ -137,3 +137,12 @@
         width: 100% !important;
     }
 }
+
+.purchase-change{
+    width: 40px;
+    margin-left: 3px;
+}
+
+.margin-none{
+    margin: 0;
+}
