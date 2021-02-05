@@ -43,3 +43,8 @@ nav.navbar{
 .navbar-nav{
     text-align: left;
 }
+
+nav.navbar button{
+    color: white !important;
+    border-color: #ffffff !important;
+}

@@ -1,5 +1,5 @@
 import WhiskeyListing from './WhiskeyListing';
-import whiskeyData from '../data/whiskeyData';
+import { whiskeyData, whiskeyDataFlattened } from '../data/whiskeyData';
 import Button from 'react-bootstrap/Button';
 import { 
     Switch,
@@ -76,11 +76,8 @@ function WhiskeyTypeNav(props) {
 function BarrelDetails(props) {
     console.log(props.whiskeyData);
     let {barrelId} = useParams();
-    const wDataFlattened = Object.keys(props.whiskeyData).reduce((acc, key) => {
-        acc.push(props.whiskeyData[key]);
-        return acc;
-    }, []).flat();
-    const whiskey = wDataFlattened.find(w => w.tokenId === parseInt(barrelId));
+   
+    const whiskey = whiskeyDataFlattened.find(w => w.tokenId === parseInt(barrelId));
 
     return (
         <>
@@ -100,8 +97,10 @@ function BarrelCard(props) {
             <Link
                 to={`${props.match.url}/${wData.tokenId}`}>
                 <div className='barrel-listing flex'>
-                    <div className='barrel-img-wrapper'>
-                        <img alt={wData.name} src='/images/rye55.jpg' />
+                    <div 
+                        className='barrel-img-wrapper'
+                        style={{background: `url(${wData.img})`}}    
+                    >
                     </div>
                     <div className='barrel-details'>
                         <div className='barrel-title'>
@@ -112,7 +111,7 @@ function BarrelCard(props) {
                             <p>{wData.distillersNotes}</p>
                         </div>
                         <div className='price'>
-                            <Button>Information</Button>
+                            <Button>Details</Button>
                         </div>
                     </div>
                 </div>

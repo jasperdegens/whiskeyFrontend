@@ -10,10 +10,10 @@ function Home() {
     return (
     <div className='container'>
         <div className='header-label margin-label'>
-            <h3 className='header-title'>What is the Whiskey Guild?</h3>
+            <h3 className='header-title'>What is Whiskey MarketMaker?</h3>
         </div> 
         <div className='label-group'>
-            <p className='description'>Whiskey Guild is a novel way for small- to mid-sized distilleries to expand potential market, gauge demand, and build new relationships with customers. Novel way for consumers to use a decentralized financial platform to support distilleries and invest in tangible whiskey they love.</p>
+            <p className='description'>At Whiskey MarketMaker, we connect whiskey enthusiasts and individuals investors with craft distilleries producing small batch, single-barrel releases. Our mission is to amplify craft distilleries while at the same time providing a unique opportunity for investors to earn historically safe returns and to play a role in the production of whiskey, from grain to glass, barrel to bottle.</p>
         </div>
         
         <div className='header-label margin-label'>
@@ -26,10 +26,8 @@ function Home() {
             <div className='how-it-works-detail detail-lg'>
                 <p className='number'>1. </p><p>A craft distillery does their magic and creates an amazing single barrel whiskey.</p>
             </div>
-            <div className='how-it-works-detail detail-sm'></div>
         </div>
         <div className='flex how-it-works-wrapper'>
-            <div className='how-it-works-detail detail-sm'></div>
             <div className='how-it-works-detail detail-md'>
                 <img src='/images/barrelHouse.jpg' alt='distillery' />
             </div>
@@ -44,10 +42,8 @@ function Home() {
             <div className='how-it-works-detail detail-md'>
                 <img src='/images/barrelTruck.jpg' alt='distillery' />
             </div>
-            <div className='how-it-works-detail detail-sm'></div>
         </div>
         <div className='flex how-it-works-wrapper'>
-            <div className='how-it-works-detail detail-sm'></div>
             <div className='how-it-works-detail detail-md'>
                 <img src='/images/limousiin.jpg' alt='distillery' />
             </div>
@@ -62,17 +58,12 @@ function Home() {
             <div className='how-it-works-detail detail-lg'>
                 <p className='number'>5. </p><p>Investors have up to four options to liquidate their investment: They can sell the bottles back to the distillery for the initial price, redeem each token for a bottle of the matured whiskey, sell the tokens on a secondary market such as opensea.io, or participate in an optional sellback program that the distillery can elect to offer.</p>
             </div>
-            <div className='how-it-works-detail detail-sm'></div>
         </div>
 
 
         <div className='header-label margin-label'>
             <h3 className='header-title'>Latest Barrels</h3>
         </div> 
-
-        <div className='header-label margin-label'>
-            <h3 className='header-title'>Why Whiskey Guild?</h3>
-        </div>
     </div>
     )
 

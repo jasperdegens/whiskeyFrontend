@@ -1,57 +1,121 @@
 import '../styles/WhiskeyDetails.css';
 import Chart from 'chart.js';
 import Button from 'react-bootstrap/Button';
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import UnderLabelTextField from './UnderLabelTextField';
+import OrderModal from './OrderModal';
+import Form from 'react-bootstrap/Form';
+import { useBarrelQuery } from '../hooks/useContractRequest';
 
 // WhiskeyDetails props = whiskey schema 
 function WhiskeyListing(props) {
-    console.log(props.whiskeyData);
+    
     const whiskeyData = props.whiskeyData;
+    const [totalBottles, bottlePrice, ownedBottles, availableBottles, agingData] = useBarrelQuery(whiskeyData.tokenId);
+    const [bottlesToPurchase, setBottlesToPurchase] = useState(0);
+    const [modalShow, setModalShow] = useState(false);
     
     function formatDate(date){
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     }
 
     function createLinearData(xRange, yRange, incriment){
-        let currX = xRange[0];
-        const xSpread = xRange[1] - xRange[0];
+        let currX = xRange[0].getTime();
+        const xSpread = xRange[1].getTime() - xRange[0].getTime();
         const ySpread = yRange[1] - yRange[0];
         const finalData = [[], []];
-        while(currX <= xRange[1]){
-            finalData[0].push(currX);
-            const normalizedVal = (currX - xRange[0]) / xSpread;
-            const yVal = (yRange[0] + ySpread * normalizedVal).toFixed(2);
+        while(currX <= xRange[1].getTime()){
+            finalData[0].push(new Date(currX));
+            const normalizedVal = (currX - xRange[0].getTime()) / xSpread;
+            const yVal = +((yRange[0] + ySpread * normalizedVal).toFixed(2));
             finalData[1].push(yVal);
             currX += incriment;
         }
         return finalData;
     }
 
+    function changePurchaseAmount(newAmount) {
+        const maxBottles = !!availableBottles ? availableBottles : 0;
+        const newVal = Math.floor(Math.max(0, Math.min(newAmount, maxBottles)));
+        setBottlesToPurchase(newVal);
+    }
+
+
     // const priceData = [
     //     { year: whiskeyData.inceptionDate.getFullYear(), price: whiskeyData.startPrice },
     //     { year: whiskeyData.matureDate.getFullYear(), price: whiskeyData.endPrice }
     // ];
-
-    const priceData = createLinearData(
-        [whiskeyData.inceptionDate.getFullYear(), whiskeyData.matureDate.getFullYear()],
-        [whiskeyData.startPrice, whiskeyData.endPrice],
-        1
-    );
-
-    const feeData = createLinearData(
-        [whiskeyData.inceptionDate.getFullYear(), whiskeyData.matureDate.getFullYear()],
-        [whiskeyData.feesPerBottle, 0],
-        1
-    );
-
-    console.log(priceData);
-
+    
     // add in charts after mount
     useEffect(() => {
+          // radar flavor profile
+          const radarLabels = Object.keys(whiskeyData.flavorProfile);
+          const radarData = radarLabels.map(v => whiskeyData.flavorProfile[v]);
+          const radarCtx = document.getElementById('flavor-chart').getContext('2d');
+          new Chart(radarCtx, {
+              type: 'radar',
+              data: {
+                  labels: radarLabels,
+                  datasets: [{
+                      data: radarData,
+                      fill: 'origin',
+                      backgroundColor: '#d18d288f'
+                  }]
+              },
+              options: {
+                  tooltips: {
+                      enabled: false,
+                  },
+                  legend: {
+                      display: false
+                  },
+                  // title: {
+                  //     display: true,
+                  //     fontColor: '#d18d28',
+                  //     text: 'Flavor Profile'
+                  // },
+                  scale: {
+                      ticks: {
+                          display: false,
+                          min: 0,
+                          max: 5
+                      },
+                      pointLabels: {
+                          fontStyle: 'bold'
+                      },
+                  },
+                  responsive: true,
+              }
+          });
+    }, []);
+
+    useEffect(() => {
+        if(!bottlePrice || !agingData)
+            return;
+        const [currPrice, startPrice, endPrice, fees] = bottlePrice.map(p=> (p / 100.0));
+
+        const startDate = new Date(Number(agingData[0].toString()) * 1000);
+        const endDate = new Date(Number(agingData[1].toString()) * 1000);
+        console.log(startDate, endDate);
+
+        const priceData = createLinearData(
+            [startDate, endDate],
+            [startPrice, endPrice],
+            31536000000 / 2
+        );
+    
+        const feeData = createLinearData(
+            [startDate, endDate],
+            [fees, 0],
+            31536000000 / 2
+        );
+        const now = new Date();
+        const currData = [{x: now, y: +(currPrice.toFixed(2))}];
+        console.log(feeData);
+        console.log(currData);
         // add price chart
         const priceCtx = document.getElementById('price-chart').getContext('2d');
-        new Chart(priceCtx, {
+        const chart = new Chart(priceCtx, {
             type: 'line',
             data: {
                 labels: priceData[0],
@@ -60,6 +124,15 @@ function WhiskeyListing(props) {
                     data: priceData[1],
                     fill: 'origin',
                     backgroundColor: '#d18d288f'
+                }, {
+                    type: 'scatter',
+                    label: 'Current Price',
+                    data: currData,
+                    fill: 'none',
+                    pointRadius: 20,
+                    pointHoverRadius: 20,
+                    pointBackgroundColor: '#074859cc'
+                    
                 }]
             },
             options: {
@@ -69,13 +142,19 @@ function WhiskeyListing(props) {
                 responsive: true,
 				scales: {
 					xAxes: [{
+                        type: 'time',
+                        time: {
+                            unit: 'year'
+                        },
 						display: true,
 						scaleLabel: {
 							display: true,
 							labelString: 'Year'
                         },
                         ticks: {
-                           stepSize: 0.5 
+                            min: startDate, 
+                            max: endDate,
+                            stepSize: 0.5 
                         }
 					}],
 					yAxes: [{
@@ -85,8 +164,8 @@ function WhiskeyListing(props) {
                             labelString: 'Price',
                         },
                         ticks: {
-                            suggestedMin: whiskeyData.startPrice,
-                            suggestedMax: whiskeyData.endPrice,
+                            suggestedMin: startPrice,
+                            suggestedMax: endPrice,
                             stepSize: 5,
                             callback: function (v, u, vs) { return '$' + v}
                         }
@@ -95,94 +174,20 @@ function WhiskeyListing(props) {
 				}
             }
         });
-        // add price chart
-        const feeCtx = document.getElementById('fee-chart').getContext('2d');
-        new Chart(feeCtx, {
-            type: 'line',
-            data: {
-                labels: feeData[0],
-                datasets: [{
-                    label: 'Price',
-                    data: feeData[1],
-                    fill: 'origin'
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                responsive: true,
-				scales: {
-					xAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Year'
-                        },
-                        ticks: {
-                           stepSize: 0.5 
-                        }
-					}],
-					yAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-                            labelString: 'Cost',
-                        },
-                        ticks: {
-                            stepSize: 1,
-                            callback: function (v, u, vs) { return '$' + v}
-                        }
-                        
-					}]
-				}
-            }
-        });
 
-        // radar flavor profile
-        const radarLabels = Object.keys(whiskeyData.flavorProfile);
-        const radarData = radarLabels.map(v => whiskeyData.flavorProfile[v]);
-        const radarCtx = document.getElementById('flavor-chart').getContext('2d');
-        new Chart(radarCtx, {
-            type: 'radar',
-            data: {
-                labels: radarLabels,
-                datasets: [{
-                    data: radarData,
-                    fill: 'origin',
-                    backgroundColor: '#d18d288f'
-                }]
-            },
-            options: {
-                tooltips: {
-                    enabled: false,
-                },
-                legend: {
-                    display: false
-                },
-                // title: {
-                //     display: true,
-                //     fontColor: '#d18d28',
-                //     text: 'Flavor Profile'
-                // },
-                scale: {
-                    ticks: {
-                        display: false,
-                        min: 0,
-                        max: 5
-                    },
-                    pointLabels: {
-                        fontStyle: 'bold'
-                    },
-                },
-                responsive: true,
-            }
-        });
-
-    });
+        return () => { chart.destroy(); }
+    }, [bottlePrice, whiskeyData, agingData]);
 
 
     return (
+        <>
+        <OrderModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            tokenId={whiskeyData.tokenId}
+            numBottles={bottlesToPurchase}
+            totalPriceUsd={!bottlePrice ? 0 : `$${((bottlesToPurchase * (bottlePrice[0] + bottlePrice[3])) / 100).toFixed(2)}`}
+        />
         <div className='whiskey-details-wrapper'>
             
             <div className='sticker-label header-label margin-label'>
@@ -226,7 +231,8 @@ function WhiskeyListing(props) {
                 />
                 <UnderLabelTextField 
                     name='Total Bottles'
-                    value={whiskeyData.bottleYield + ' Bottles'}
+                    isLoading={!totalBottles}
+                    value={totalBottles  + ' Bottles'}
                 />
             </div>
             <div className='header-label margin-label'>
@@ -259,49 +265,92 @@ function WhiskeyListing(props) {
                 <h3 className='header-title'>PRICING</h3>
             </div>            
             <div className='label-group margin-top'>
-                <div className='chart-wrapper'>
+                <div className='chart-wrapper chart-wrapper-full'>
                     <h4>Price Projection</h4>
                     <canvas id='price-chart' />
-                </div>
-                <div className='chart-wrapper'>
-                    <h4>Remaining Fees</h4>
-                    <canvas id='fee-chart' />
                 </div>
             </div>
             <div className='label-group'>
                 <UnderLabelTextField 
                     name='Current Price Per Bottle'
-                    value={`$${whiskeyData.startPrice.toFixed(2)}`}
+                    isLoading={!bottlePrice}
+                    value={!!bottlePrice ?  `$${(bottlePrice[0] / 100).toFixed(2)}` : ""}
                 />
                 <UnderLabelTextField 
                     name='Lifetime Fees Per Bottle'
-                    value={`$${whiskeyData.feesPerBottle.toFixed(2)}`}
+                    isLoading={!bottlePrice}
+                    value={!!bottlePrice ?  `$${(bottlePrice[3] / 100).toFixed(2)}` : ""}
                 />
             </div>
             <div className='header-label margin-label'>
                 <h3 className='header-title'>Purchase</h3>
             </div>
             <div className='label-group'>
-                <Button>
-                    Purchase
-                </Button>
+                <UnderLabelTextField 
+                    name='Owned Bottles'
+                    isLoading={!ownedBottles}
+                    value={ownedBottles  + ' Bottles'}
+                />
+                <UnderLabelTextField 
+                    name='Available Bottles'
+                    isLoading={!availableBottles}
+                    value={availableBottles  + ' Bottles'}
+                />
+            </div>
+            <div className='label-group flex-start'>
+                <div className='flex'>
+                    <div className='under-label-wrapper margin-none'>
+                        <Form.Control 
+                            type='number' 
+                            value={bottlesToPurchase}
+                            onChange={(e) => changePurchaseAmount(e.target.value)}
+                        />
+                        <div className='line'></div>
+                        <p className='under-label'>Purchase Quantity</p>
+                    </div>
+                    <div className='under-label-wrapper'>
+                        <Button 
+                            variant='outline-danger'
+                            className='purchase-change'
+                            onClick={() => changePurchaseAmount(bottlesToPurchase - 1)}
+                        >-</Button>
+                        <Button 
+                            variant='outline-success'
+                            className='purchase-change'
+                            onClick={() => changePurchaseAmount(bottlesToPurchase + 1)}
+                        >+</Button>
+                    </div>
+                </div>
+                <UnderLabelTextField 
+                    name='Total Price (bottle + fees)'
+                    value={!bottlePrice ? 0 : `$${((bottlesToPurchase * (bottlePrice[0] + bottlePrice[3])) / 100).toFixed(2)}`}
+                />
+                <div className='under-label-wrapper'>
+                    <Button 
+                        size='lg' 
+                        variant='info'
+                        onClick={() => setModalShow(true)}
+                    >
+                        Purchase
+                    </Button>
+                </div>
             </div>
 
         </div>
+        </>
     );
 }
 
-function UnderLabelTextField(props) {
-    
+
+function UnderLabelInput(props) {
     return (
         <div className='under-label-wrapper'>
-            <p className='label-value'>{props.value}</p>
+            <Form.Control type='number' />
             <div className='line'></div>
             <p className='under-label'>{props.name}</p>
         </div>
     )
 }
-
 
 
 export default WhiskeyListing;
