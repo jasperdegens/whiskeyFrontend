@@ -32,9 +32,9 @@ function OrderModal(props) {
             </Modal.Header>
             <Modal.Body>
                 <h5>Order Details</h5>
-                <p>{props.numBottles} Bottles</p>
-                <p>{props.totalPriceUsd}</p>
-                <p>{ethPrice} ETH</p>
+                <p>{props.name}</p>
+                <p>{`${props.numBottles} Bottles @ $${(props.bottlePrice/100).toFixed(2)} = $${props.totalPriceUsd}`}</p>
+                <p>{`$${props.totalPriceUsd} @ ${ethPrice}ETH/USD = ${ethPrice}`}&#9776;</p>
                 
             </Modal.Body>
             <Modal.Footer>

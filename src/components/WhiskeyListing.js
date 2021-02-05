@@ -186,7 +186,9 @@ function WhiskeyListing(props) {
             onHide={() => setModalShow(false)}
             tokenId={whiskeyData.tokenId}
             numBottles={bottlesToPurchase}
-            totalPriceUsd={!bottlePrice ? 0 : `$${((bottlesToPurchase * (bottlePrice[0] + bottlePrice[3])) / 100).toFixed(2)}`}
+            name={whiskeyData.name}
+            bottlePrice={!bottlePrice ? 0 : bottlePrice[0] + bottlePrice[3]}
+            totalPriceUsd={!bottlePrice ? 0 : ((bottlesToPurchase * (bottlePrice[0] + bottlePrice[3])) / 100).toFixed(2)}
         />
         <div className='whiskey-details-wrapper'>
             
@@ -277,6 +279,16 @@ function WhiskeyListing(props) {
                     value={!!bottlePrice ?  `$${(bottlePrice[0] / 100).toFixed(2)}` : ""}
                 />
                 <UnderLabelTextField 
+                    name='Base Price Per Bottle'
+                    isLoading={!bottlePrice}
+                    value={!!bottlePrice ?  `$${(bottlePrice[1] / 100).toFixed(2)}` : ""}
+                />
+                <UnderLabelTextField 
+                    name='Matured Price Per Bottle'
+                    isLoading={!bottlePrice}
+                    value={!!bottlePrice ?  `$${(bottlePrice[2] / 100).toFixed(2)}` : ""}
+                />
+                <UnderLabelTextField 
                     name='Lifetime Fees Per Bottle'
                     isLoading={!bottlePrice}
                     value={!!bottlePrice ?  `$${(bottlePrice[3] / 100).toFixed(2)}` : ""}
@@ -323,7 +335,8 @@ function WhiskeyListing(props) {
                 </div>
                 <UnderLabelTextField 
                     name='Total Price (bottle + fees)'
-                    value={!bottlePrice ? 0 : `$${((bottlesToPurchase * (bottlePrice[0] + bottlePrice[3])) / 100).toFixed(2)}`}
+                    value={!bottlePrice ? 0 :
+                        `($${(bottlePrice[0] / 100).toFixed(2)} + $${(bottlePrice[3] / 100).toFixed(2)}) * ${bottlesToPurchase} = $${((bottlesToPurchase * (bottlePrice[0] + bottlePrice[3])) / 100).toFixed(2)}`}
                 />
                 <div className='under-label-wrapper'>
                     <Button 

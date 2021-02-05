@@ -10,6 +10,6 @@ const CONTRACT_ADDRESS = {
 }
 
 
-const contractEnv = CONTRACT_ADDRESS['kovan'];
+const contractEnv = CONTRACT_ADDRESS['local'];
 
 export default contractEnv;

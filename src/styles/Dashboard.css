@@ -32,3 +32,7 @@
 .release-countdown{
     justify-content: space-between;
 }
+
+.donut-chart-wrapper{
+    position: relative;
+}

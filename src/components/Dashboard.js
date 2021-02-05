@@ -25,14 +25,20 @@ function Dashboard() {
     const [whiskeyInventory, setWhiskeyInventory] = useState(undefined);
     const [whiskeyPlatform, barrelHouse] = useContracts();
     const { account } = useWeb3React(); 
+    const [totalSpent, setTotalSpent] = useState(0);
+    const [totalCurrentValue, setTotalCurrentValue] = useState(0);
+    const [totalMaturedValue, setTotalMaturedValue] = useState(0);
 
     useEffect(() => {
-        
+        let currentValue = 0;
+        let maturedValue = 0;
+
         async function checkWhiskey(tokenId) {
             const bottles = await barrelHouse.balanceOf(account, tokenId);
             const bottlesOwned = bottles.toNumber();
             if(bottlesOwned > 0) {
                 const [, endDate] = await whiskeyPlatform.barrelMaturationData(tokenId);
+                const bottlePrice = await whiskeyPlatform.currentBottlePrice(tokenId);
                 const dbData = whiskeyDataFlattened.find(w => w.tokenId === tokenId);
                 const newData = {
                     id: tokenId,
@@ -40,12 +46,14 @@ function Dashboard() {
                     bottles: bottlesOwned,
                     releaseDate: endDate.toNumber()
                 };
+                currentValue += bottlePrice[0];
+                maturedValue += bottlePrice[2];
                 // setWhiskeyInventory(w => {
                     //     console.log(w);
                     //     return w.push(newData);
                     // });
-                    return newData;
-                }
+                return newData;
+            }
             return null;
         }
         
@@ -59,7 +67,12 @@ function Dashboard() {
                     allOwned.push(newData);
                 }
             }
+            setTotalCurrentValue(currentValue / 100.0);
+            setTotalMaturedValue(maturedValue / 100.0);
             setWhiskeyInventory(allOwned);
+
+            const spendTotal = await whiskeyPlatform.getInvetmentTotal(account);
+            setTotalSpent(spendTotal / 100.0);
         }
         
 
@@ -93,10 +106,10 @@ function Dashboard() {
                         inventory={whiskeyInventory}
                     />
                     <InvestmentSummary 
-                        totalPaid={450}
+                        totalPaid={totalSpent}
                         totalBottles={10}
-                        currentBottleValue={530}
-                        finalBottleValue={570}
+                        currentBottleValue={totalCurrentValue}
+                        finalBottleValue={totalMaturedValue}
                     />
                 </div>
                 <div className='dashboard-section'>
@@ -285,6 +298,11 @@ function PortfolioChart(props) {
 
     return (
         <div className='donut-chart-wrapper'>
+            {!whiskeyInventory ? (
+                <div className='full flex flex-center'>
+                    '<Spinner animation="border" size='lg'/>
+                </div>
+            ) : ''}
             <canvas id='whiskey-inventory'></canvas>
         </div>
     )
