@@ -27,12 +27,14 @@ function Dashboard() {
     const { account } = useWeb3React(); 
     const [totalSpent, setTotalSpent] = useState(0);
     const [totalCurrentValue, setTotalCurrentValue] = useState(0);
+    const [totalBottles, setTotalBottles] = useState(0);
     const [totalMaturedValue, setTotalMaturedValue] = useState(0);
     const [aWETHBalance, setAWETHBalance] = useState(0);
 
     useEffect(() => {
         let currentValue = 0;
         let maturedValue = 0;
+        let allBottles = 0;
 
         async function checkWhiskey(tokenId) {
             const bottles = await barrelHouse.balanceOf(account, tokenId);
@@ -49,6 +51,7 @@ function Dashboard() {
                 };
                 currentValue += bottlePrice[0] * bottlesOwned;
                 maturedValue += bottlePrice[2] * bottlesOwned;
+                allBottles += bottlesOwned;
                 // setWhiskeyInventory(w => {
                     //     console.log(w);
                     //     return w.push(newData);
@@ -71,6 +74,7 @@ function Dashboard() {
             setTotalCurrentValue(currentValue / 100.0);
             setTotalMaturedValue(maturedValue / 100.0);
             setWhiskeyInventory(allOwned);
+            setTotalBottles(allBottles);
 
             const spendTotal = await whiskeyPlatform.getInvetmentTotal(account);
             setTotalSpent(spendTotal / 100.0);
@@ -119,7 +123,7 @@ function Dashboard() {
                     <InvestmentSummary 
                         totalPaid={totalSpent}
                         aWETHBalance={aWETHBalance}
-                        totalBottles={10}
+                        totalBottles={totalBottles}
                         currentBottleValue={totalCurrentValue}
                         finalBottleValue={totalMaturedValue}
                     />
@@ -340,7 +344,7 @@ function InvestmentSummary(props) {
             />
              <UnderLabelTextField 
                 name='Total Fees Staked in Aave'
-                value={props.aWETHBalance}
+                value={`${props.aWETHBalance} ETH`}
             />
             <UnderLabelTextField 
                 name='Gains to Date'
