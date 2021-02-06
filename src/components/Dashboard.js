@@ -9,7 +9,7 @@ import { useWeb3React } from '@web3-react/core';
 import { Link } from 'react-router-dom';
 import UnderLabelTextField from './UnderLabelTextField';
 import '../styles/Dashboard.css'
-
+import { ethers } from 'ethers';
 //const testReleaseDate = (new Date(2023, 0, 0)).getTime() / 1000;
 
 // const sampleData = [
@@ -23,11 +23,12 @@ import '../styles/Dashboard.css'
 function Dashboard() {
 
     const [whiskeyInventory, setWhiskeyInventory] = useState(undefined);
-    const [whiskeyPlatform, barrelHouse] = useContracts();
+    const [whiskeyPlatform, barrelHouse, aWETHContract] = useContracts();
     const { account } = useWeb3React(); 
     const [totalSpent, setTotalSpent] = useState(0);
     const [totalCurrentValue, setTotalCurrentValue] = useState(0);
     const [totalMaturedValue, setTotalMaturedValue] = useState(0);
+    const [aWETHBalance, setAWETHBalance] = useState(0);
 
     useEffect(() => {
         let currentValue = 0;
@@ -46,8 +47,8 @@ function Dashboard() {
                     bottles: bottlesOwned,
                     releaseDate: endDate.toNumber()
                 };
-                currentValue += bottlePrice[0];
-                maturedValue += bottlePrice[2];
+                currentValue += bottlePrice[0] * bottlesOwned;
+                maturedValue += bottlePrice[2] * bottlesOwned;
                 // setWhiskeyInventory(w => {
                     //     console.log(w);
                     //     return w.push(newData);
@@ -74,6 +75,12 @@ function Dashboard() {
             const spendTotal = await whiskeyPlatform.getInvetmentTotal(account);
             setTotalSpent(spendTotal / 100.0);
         }
+
+        async function getAWETHBalance() {
+            const balance = await aWETHContract.balanceOf(whiskeyPlatform.address);
+            console.log(balance);
+            setAWETHBalance(balance.div(ethers.constants.WeiPerEther.div(10**8)).toNumber() / 100000000.0);
+        }
         
 
         // clear old inventory
@@ -85,7 +92,11 @@ function Dashboard() {
             getNumBarrels();
         }
 
-    }, [barrelHouse, whiskeyPlatform, account])
+        if(!!aWETHContract && !!whiskeyPlatform) {
+            getAWETHBalance();
+        }
+
+    }, [barrelHouse, whiskeyPlatform, aWETHContract, account])
 
     const whiskeyActions = !whiskeyInventory || whiskeyInventory.length === 0 ? (<></>) : whiskeyInventory.map(d => (
         <WhiskeyAction
@@ -107,6 +118,7 @@ function Dashboard() {
                     />
                     <InvestmentSummary 
                         totalPaid={totalSpent}
+                        aWETHBalance={aWETHBalance}
                         totalBottles={10}
                         currentBottleValue={totalCurrentValue}
                         finalBottleValue={totalMaturedValue}
@@ -314,21 +326,25 @@ function InvestmentSummary(props) {
 
     return (
         <div className='label-group'>
-            <UnderLabelTextField 
+            {/* <UnderLabelTextField 
                 name='Total Staked in Barrels'
                 value={'$' + props.totalPaid.toFixed(2)}
-            />
-            <UnderLabelTextField 
-                name='Avg Price Paid Per Bottle'
-                value={'$' + (props.totalPaid / props.totalBottles).toFixed(2)}
-            />
+            /> */}
             <UnderLabelTextField 
                 name='Current Staked Value'
                 value={'$' + (props.currentBottleValue).toFixed(2)}
             />
             <UnderLabelTextField 
+                name='Avg Price Paid Per Bottle'
+                value={'$' + (props.totalPaid / props.totalBottles).toFixed(2)}
+            />
+             <UnderLabelTextField 
+                name='Total Fees Staked in Aave'
+                value={props.aWETHBalance}
+            />
+            <UnderLabelTextField 
                 name='Gains to Date'
-                value={'+$' + (props.currentBottleValue - props.totalPaid).toFixed(2)}
+                value={'+$' + Math.max(0, (props.currentBottleValue - props.totalPaid)).toFixed(2)}
                 positive='true'
             />
             <UnderLabelTextField 
@@ -338,7 +354,7 @@ function InvestmentSummary(props) {
             />
             <UnderLabelTextField 
                 name='Estimated APY'
-                value='10%'
+                value='15.22%'
                 positive='true'
             />
         </div>

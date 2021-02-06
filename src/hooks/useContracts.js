@@ -4,7 +4,7 @@ import { ethers } from 'ethers';
 import contractAddresses from '../data/contractAddresses.js';
 const whiskeyPlatformAbi = require('../contracts/WhiskeyPlatformV1.sol/WhiskeyPlatformV1.json');
 const barrelHouseAbi = require('../contracts/BarrelHouse.sol/BarrelHouse.json');
-
+const aWethAbi = require('../contracts/aWETHabi.json');
 
 const useContract = (address, abi) => {
     
@@ -54,9 +54,15 @@ const useContracts = () => {
         barrelHouseAbi.abi
     );
 
+    const aWETHContract = useContract(
+        contractAddresses.aWETHContract,
+        aWethAbi
+    );
+
+
     window.whiskey = whiskeyPlatform;
 
-    return [ whiskeyPlatform, barrelHouse ];
+    return [ whiskeyPlatform, barrelHouse, aWETHContract ];
 
 
 }
