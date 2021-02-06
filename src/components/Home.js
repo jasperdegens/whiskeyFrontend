@@ -18,7 +18,23 @@ function Home() {
         
         <div className='header-label margin-label'>
             <h3 className='header-title'>How it Works</h3>
-        </div> 
+        </div>
+        <div className='flow-wrapper'>
+        <div className='flow flow-distillery'>
+            <div className='rotated'><p>Distillery</p></div>
+            <div>
+            <img src="/images/distilleryFlow.png" alt="Distillery Process"/>
+            </div> 
+        </div>
+        <div className='flow flow-consumer'>
+        <div className='rotated'><p>User</p></div>
+            <div><img src="/images/consumerFlow.png" alt="User Process"/> 
+            </div>
+        </div>
+        </div>
+        <div className='header-label margin-label'>
+            <h3 className='header-title'>Process Details</h3>
+        </div>
         <div className='flex how-it-works-wrapper'>
             <div className='how-it-works-tab tab-right flex'>
                 <div 
@@ -32,7 +48,7 @@ function Home() {
                 <div className='flex-spacer'></div>
             </div>
         </div>
-        <div class='down-arrow down-arrow-left'><p>&#8682;</p></div>
+        {/* <div class='down-arrow down-arrow-left'><p>&#8682;</p></div> */}
         <div className='flex how-it-works-wrapper flex-end'>
             <div className='how-it-works-tab tab-left flex'>
                 <div className='how-it-works-detail'>
@@ -45,42 +61,55 @@ function Home() {
                 </div>
             </div>
         </div>
-        <div class='down-arrow down-arrow-right'><p>&#8682;</p></div>
+        {/* <div class='down-arrow down-arrow-right'><p>&#8682;</p></div> */}
         <div className='flex how-it-works-wrapper'>
             <div className='how-it-works-tab tab-right flex'>
+                <div 
+                    className='how-it-works-img'
+                    style={{background: `url('/images/still.jpg')`}}  
+                >
+                </div>
+                <div className='how-it-works-detail'>
+                    <p className='number'>3. </p><p>The distillery lists their product on Whiskey MarketMaker, where our BarrelHouse contract mints each bottles as an ERC1155 token. The barrel then is listed as available to purchase.</p>
+                </div>
+            </div>
+        </div>
+        {/* <div class='down-arrow down-arrow-left'><p>&#8682;</p></div> */}
+        <div className='flex how-it-works-wrapper flex-end'>
+            <div className='how-it-works-tab tab-left flex'>
+                <div className='how-it-works-detail'>
+                    <p className='number'>4. </p><p>Investors purchase shares of the barrel on a per-bottle basis using Ethereum (ETH) or another compatible cryptocurrency. In addition to the cost of the bottles, investors pay a percentage of the lifetime maintenance fee equal to the percentage of the barrel they own.</p>
+                </div>
                 <div 
                     className='how-it-works-img'
                     style={{background: `url('/images/limousiin.jpg')`}}  
                 >
                 </div>
-                <div className='how-it-works-detail'>
-                    <p className='number'>3. </p><p>Investors purchase shares of the barrel on a per-bottle basis using Ethereum (ETH) or another compatible cryptocurrency. In addition to the cost of the bottles, investors pay a percentage of the lifetime maintenance fee equal to the percentage of the barrel they own.</p>
-                </div>
             </div>
         </div>
-        <div class='down-arrow down-arrow-left'><p>&#8682;</p></div>
-        <div className='flex how-it-works-wrapper flex-end'>
-            <div className='how-it-works-tab tab-left flex'>
-                <div className='how-it-works-detail'>
-                    <p className='number'>4. </p><p>Investors can track the present value of their bottles on our website and receive annual updates on the barrel from the distillery. Investments appreciate following the function:</p>
-                </div>
+        {/* <div class='down-arrow down-arrow-right'><p>&#8682;</p></div> */}
+        <div className='flex how-it-works-wrapper'>
+            <div className='how-it-works-tab tab-right flex'>
                 <div 
                     className='how-it-works-img'
                     style={{background: `url('/images/barrelTruck.jpg')`}}  
                 >
                 </div>
+                <div className='how-it-works-detail'>
+                    <p className='number'>5. </p><p>Investors can track the present value of their bottles on our website and receive annual updates on the barrel from the distillery. Investments appreciate following the function:</p>
+                </div>
             </div>
         </div>
-        <div class='down-arrow down-arrow-right'><p>&#8682;</p></div>
-        <div className='flex how-it-works-wrapper'>
-            <div className='how-it-works-tab tab-right flex'>
+        {/* <div class='down-arrow down-arrow-left'><p>&#8682;</p></div> */}
+        <div className='flex how-it-works-wrapper flex-end'>
+            <div className='how-it-works-tab tab-left flex'>
+                <div className='how-it-works-detail'>
+                    <p className='number'>6. </p><p>Investors have up to four options to liquidate their investment: They can sell the bottles back to the distillery for the initial price, redeem each token for a bottle of the matured whiskey, sell the tokens on a secondary market such as opensea.io, or participate in an optional sellback program that the distillery can elect to offer.</p>
+                </div>
                 <div
                     className='how-it-works-img'
                     style={{background: `url('/images/rye55.jpg')`}}  
                 >
-                </div>
-                <div className='how-it-works-detail'>
-                    <p className='number'>5. </p><p>Investors have up to four options to liquidate their investment: They can sell the bottles back to the distillery for the initial price, redeem each token for a bottle of the matured whiskey, sell the tokens on a secondary market such as opensea.io, or participate in an optional sellback program that the distillery can elect to offer.</p>
                 </div>
             </div>
         </div>

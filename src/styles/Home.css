@@ -6,6 +6,53 @@
     font-size: 16px;
 }
 
+.flow-wrapper{
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+@media (min-width: 850px) {
+    .flow-wrapper{
+        max-width: 60%;
+    }
+}
+
+.flow{
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.flow img{
+    max-width: 100%;
+    border-top: 2px solid #0000007a;
+    border-right: 2px solid #0000007a;
+    border-bottom: 2px solid #0000007a;
+    border-radius: 0 2em 2em 0;
+}
+
+.flow-distillery img{
+    max-height: 200px;
+}
+
+.flow-consumer img{
+    max-height: 406px;
+}
+
+.rotated{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary-color);
+    width: 40px;
+}
+
+.rotated p{
+    transform: rotate(270deg);
+    margin: 0;
+    color: var(--light-color);
+    font-size: 16px;
+}
+
 .how-it-works-wrapper{
     align-items: center;
     justify-content: space-between;
