@@ -86,7 +86,7 @@ const rye39 = {
 };
 
 const rye40 = {
-    name: 'Peach Rock and Rye Barrel',
+    name: 'Peach Rock and Rye',
     tokenId: 2,
     distillery: 'Stone Barn',
     whiskeyType: 'Rock and Rye',
@@ -110,7 +110,7 @@ const rye40 = {
 
 const rye41 = {
     name: 'Straight Rye Barrel #58',
-    tokenId: 2,
+    tokenId: 3,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Rye',
     distilleryAddress: '0x9192',
@@ -133,7 +133,7 @@ const rye41 = {
 
 const rye42 = {
     name: 'Straight Rye Barrel #58',
-    tokenId: 2,
+    tokenId: 4,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Rye',
     distilleryAddress: '0x9192',
@@ -157,7 +157,7 @@ const rye42 = {
 
 const Bourbon42 = {
     name: 'Straight Bourbon Barrel #42',
-    tokenId: 3,
+    tokenId: 5,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Bourbon',
     distilleryAddress: '0x9192',
@@ -179,8 +179,8 @@ const Bourbon42 = {
 };
 
 const Bourbon43 = {
-    name: 'Bourbon Barrel Barrel #43',
-    tokenId: 4,
+    name: 'Bourbon Barrel #43',
+    tokenId: 6,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Bourbon',
     distilleryAddress: '0x9192',
@@ -202,8 +202,8 @@ const Bourbon43 = {
 };
 
 const Bourbon44 = {
-    name: 'Bourbon Barrel Barrel #44',
-    tokenId: 5,
+    name: 'Bourbon Barrel #44',
+    tokenId: 7,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Bourbon',
     distilleryAddress: '0x9192',
@@ -225,8 +225,8 @@ const Bourbon44 = {
 };
 
 const Bourbon74 = {
-    name: 'Straight Bourbon Barrel Barrel #74',
-    tokenId: 5,
+    name: 'Straight Bourbon Barrel #74',
+    tokenId: 8,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Bourbon',
     distilleryAddress: '0x9192',
@@ -248,8 +248,8 @@ const Bourbon74 = {
 };
 
 const Bourbon88 = {
-    name: 'Straight Bourbon Barrel Barrel #88',
-    tokenId: 5,
+    name: 'Straight Bourbon Barrel #88',
+    tokenId: 9,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Bourbon',
     distilleryAddress: '0x9192',
@@ -273,7 +273,7 @@ const Bourbon88 = {
 
 const Blend46 = {
     name: 'Hopping Eights Barrel #46',
-    tokenId: 6,
+    tokenId: 10,
     distillery: 'Stone Barn',
     whiskeyType: 'Blended Whiskey',
     distilleryAddress: '0x9192',
@@ -296,7 +296,7 @@ const Blend46 = {
 
 const Blend47 = {
     name: 'Barnstormer Barrel #47',
-    tokenId: 7,
+    tokenId: 11,
     distillery: 'Stone Barn',
     whiskeyType: 'Imperial Red Single Malt Whiskey',
     distilleryAddress: '0x9192',
@@ -319,7 +319,7 @@ const Blend47 = {
 
 const Blend48 = {
     name: 'Blended Barrel #48',
-    tokenId: 8,
+    tokenId: 12,
     distillery: 'Stone Barn',
     whiskeyType: 'Blended Whiskey',
     distilleryAddress: '0x9192',
@@ -342,7 +342,7 @@ const Blend48 = {
 
 const Special50 = {
     name: 'Straight Oat Barrel #50',
-    tokenId: 9,
+    tokenId: 13,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Oat',
     distilleryAddress: '0x9192',
@@ -365,7 +365,7 @@ const Special50 = {
 
 const Special51 = {
     name: 'Spelt Barrel #49',
-    tokenId: 10,
+    tokenId: 14,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Spelt',
     distilleryAddress: '0x9192',
@@ -387,8 +387,8 @@ const Special51 = {
 };
 
 const Special52 = {
-    name: 'Straight Millet Barrel',
-    tokenId: 10,
+    name: 'Straight Millet',
+    tokenId: 15,
     distillery: 'Stone Barn',
     whiskeyType: 'Straight Millet',
     distilleryAddress: '0x9192',
