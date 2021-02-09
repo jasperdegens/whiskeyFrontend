@@ -18,7 +18,7 @@ function About() {
                             <h4>Tillman Degens</h4>
                         </div>
                         <div className='barrel-description'>
-                            <p>Tillman is lorem ipsum</p>
+                            <p>Tillman is interested in examining changing landscapes in the world and the opportunities they provide. He has a passion for finance, with a focus on the technology sector. He is currently enrolled in the Master’s Program in Economics at the University of Oregon and works as a market representative for Stone Barn Brandy Works. In his free time, he enjoys live music, long road trips, and skiing.</p>
                         </div>
                     </div>
                 </div>
