@@ -11,7 +11,6 @@ const usePriceFeed = () => {
     const { library } = useWeb3React();
 
     useEffect(() => {
-        console.log("creating contract")
         createContract();
         updatePrice();
 
@@ -28,19 +27,14 @@ const usePriceFeed = () => {
     }
 
     async function updatePrice() {
-        console.log("updating");
         if(!aggregatorContract)
             createContract();
         
         if(!aggregatorContract)
             return;
 
-        console.log(aggregatorContract);
-
         try{
             const roundData = await aggregatorContract.latestRoundData()
-            // Do something with roundData
-            console.log("Latest Round Data", roundData)
             setCurrPrice(roundData.answer.toNumber());
         } catch {
 

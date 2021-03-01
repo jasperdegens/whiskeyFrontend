@@ -21,7 +21,6 @@ const useContract = (address, abi) => {
                     library
                 );
                 setContract(attachedContract);
-                console.log(attachedContract);
             }
         }
 

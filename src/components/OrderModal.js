@@ -27,11 +27,14 @@ function OrderModal(props) {
         updatePrice();
     }, [props.show, updatePrice])
 
-    const testPrice = currPrice === 0 ? 1688 * 10**8 : currPrice;
-    const priceInWei = ethers.constants.WeiPerEther.mul(Math.floor(props.totalPriceUsd * 100)).mul(10**6).div(testPrice);
+    const ethToUsdRate = currPrice === 0 ? 1688 * 10**8 : currPrice;
+    const chainlinkDecimals = 8; // await priceFeed.decimals();
+    // used to expand out decimal places
+    const internalDecimals = 2;
+    const usdToWei = ethers.constants.WeiPerEther.mul(chainlinkDecimals).div(ethToUsdRate);
+    const priceInWei = usdToWei.mul(Math.floor(props.totalPriceUsd * 10**internalDecimals)).div(10**internalDecimals);
 
-    const ethPrice = currPrice;
-    const finalPriceInEth =  props.totalPriceUsd / (testPrice / (10**8));
+    const finalPriceInEth =  props.totalPriceUsd / (ethToUsdRate / (10**chainlinkDecimals));
 
     return (
         <Modal
@@ -48,7 +51,7 @@ function OrderModal(props) {
                 <h5>Order Details</h5>
                 <p>{props.name}</p>
                 <p>{`${props.numBottles} Bottles @ $${(props.bottlePrice/100).toFixed(2)} = $${props.totalPriceUsd}`}</p>
-                <p>{`$${props.totalPriceUsd} @ ${(testPrice / (10**8)).toFixed(2)}USD/ETH = `}&#9776;{`${finalPriceInEth}`}</p>
+                <p>{`$${props.totalPriceUsd} @ ${(ethToUsdRate / (10**8)).toFixed(2)}USD/ETH = `}&#9776;{`${finalPriceInEth}`}</p>
                 
             </Modal.Body>
             <Modal.Footer>

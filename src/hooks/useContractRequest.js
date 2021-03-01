@@ -11,7 +11,6 @@ const useRequest = (contract, reqName, params) => {
             try{
                 const res = await contract[reqName](...params);
                 setResult((res));
-                console.log(res);
             }catch (err){
                 console.log(err);
             }

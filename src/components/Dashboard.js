@@ -340,7 +340,7 @@ function InvestmentSummary(props) {
             />
             <UnderLabelTextField 
                 name='Avg Price Paid Per Bottle'
-                value={'$' + (props.totalPaid / props.totalBottles).toFixed(2)}
+                value={'$' + (props.totalPaid / Math.max(1, props.totalBottles)).toFixed(2)}
             />
              <UnderLabelTextField 
                 name='Total Fees Staked in Aave'
